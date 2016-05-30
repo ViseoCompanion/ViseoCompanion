@@ -34,6 +34,9 @@ var REQUEST_URL5 = ''
 var REQUEST_URL8P1 = 'http://10.33.171.10:8080/C360/api/helloworld8/compte/';
 var REQUEST_URL8P2 = '/events'
 var REQUEST_URL8 = ''
+var REQUEST_URL9P1 = 'http://10.33.171.10:8080/C360/api/helloworld8/compte/';
+var REQUEST_URL9P2 = '/events'
+var REQUEST_URL9 = ''
 //var carte='https://www.google.fr/maps/place/Rue+de+Paris,+92100+Boulogne-Billancourt/@48.8411462,2.2379902,17z/data=!3m1!4b1!4m2!3m1!1s0x47e67add04bbdb5b:0xaab81bad228d86ad'
 
 function addZero(i) {
