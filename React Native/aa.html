@@ -1,0 +1,51 @@
+HTML代码：
+<!DOCTYPE html>
+<head>
+<meta charset="UTF-8">
+<title>HTML5 存取复杂数据到json对象DEMO</title>
+<script type="text/javascript" src="js/objectStorage.js"></script>
+</head>
+
+<body>
+
+<h3>使用HTML5存储复杂数据到json对象</h3>
+
+<h4>填写一组相关信息到表格中</h4>
+<table>
+     <tr><td>nom:</td><td><input type="text" id="name"></td></tr>
+     <tr><td>email:</td><td><input type="text" id="email"></td></tr>
+     <tr><td>numero:</td><td><input type="text" id="phone"></td></tr>
+     <tr><td></td><td><input type="button" value="保存" onclick="saveStorage();"></td></tr>
+</table>
+
+<hr>
+ <h4> 这里将会获取已经存入localStorage的json对象，并且解析成原始信息并且展示</h4>
+<p>
+<input type="text" id="find">
+<input type="button" value="检索" onclick="findStorage('msg');">
+</p>
+26. <!-- 下面这块用于显示被检索到的信息文本 -->
+<p id ="msg"></p>
+</body>
+javascript包含2个函数，一个是存数据，一个是取数据：
+1. /**
+2.  *  This file is confidential by Charles.Wang
+3.  *  Copyright belongs to Charles.wang
+4.  *  You can make contact with Charles.Wang (charles_wang888@126.com)
+5.  */
+6.
+7.  //存一组关联数据到json对象，再把json对象存放到localStorage中
+function saveStorage(){
+
+创建一个js对象，用于存放当前从表单获得的数据
+11.     var data = new Object;
+12.     //吧这对象的属性名依次和从用户输入的属性值关联起来
+13.     data.name=document.getElementById("name").value;
+14.     data.email=document.getElementById("email").value;
+15.     data.phone=document.getElementById("phone").value;
+16.     //创建一个json对象，让其对应刚才创建的对象的字符串数据形式
+17.     var str = JSON.stringify(data);
+18.     //吧json对象存放到localStorage上，key为用户输入的用户名，value为这个json字符串
+19.     localStorage.setItem(data.name,str);
+20.     console.log("数据已经保存! 被保存的用户名为: "+data.name);
+21.  }

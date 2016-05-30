@@ -1,0 +1,3 @@
+rootProject.name = 'project_companion'
+
+include ':app'
