@@ -45,7 +45,7 @@ function addZero(i) {
   return i;
 }
 
-var REQUEST_URL = 'http://10.33.171.10:8080/C360/api/helloworld';
+var REQUEST_URL = 'http://10.33.171.28:8080/C360/api/helloworld';
 
 class HomePage extends React.Component {
 

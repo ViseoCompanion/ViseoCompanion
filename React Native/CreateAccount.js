@@ -22,8 +22,8 @@ height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
-const REQUEST_URL2 = 'http://10.33.171.10:8080/C360/api/helloworld2';
-const REQUEST_URL4 = 'http://10.33.171.10:8080/C360/api/helloworld4';
+const REQUEST_URL2 = 'http://10.33.171.28:8080/C360/api/helloworld2';
+const REQUEST_URL4 = 'http://10.33.171.28:8080/C360/api/helloworld4';
 
 
 class CreateAccount extends React.Component{
