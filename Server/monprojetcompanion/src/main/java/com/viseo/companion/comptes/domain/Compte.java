@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.viseo.companion.evenements.domain.Event;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.viseo.companion.compteEvents.domain.CompteEvent;
 
 @Entity
@@ -69,7 +70,8 @@ public class Compte implements java.io.Serializable{
 		this.password=password;
 	}
 
-	@OneToMany(mappedBy = "pk.compte", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.compte", cascade=CascadeType.ALL)
+	@JsonBackReference
 	public Set<CompteEvent> getCompteEvents(){
 		return compteEvents;
 	}

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import com.viseo.companion.comptes.domain.Compte;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.viseo.companion.compteEvents.domain.CompteEvent;
 
 
@@ -102,7 +103,8 @@ public class Event implements java.io.Serializable
 		this.lieu=lieu;
 	}
 	
-	@OneToMany(mappedBy = "pk.event", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.event", cascade = CascadeType.ALL)
+	@JsonBackReference
 	public Set<CompteEvent> getCompteEvents(){
 		return compteEvents;
 	}
