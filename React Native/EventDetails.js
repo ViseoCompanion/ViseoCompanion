@@ -25,18 +25,21 @@ width: deviceWidth
 } = Dimensions.get('window');
 
 var id=2;
-var REQUEST_URL7P1 = 'http://10.33.171.28:8080/C360/api/helloworld7/compte/';
+var REQUEST_URL7P1 = 'http://10.33.171.16:8080/C360/api/helloworld7/compte/';
 var REQUEST_URL7P2 = '/events'
 var REQUEST_URL7 = ''
-var REQUEST_URL5P1 = 'http://10.33.171.28:8080/C360/api/helloworld5/compte/';
-var REQUEST_URL5P2 = '/events'
+var REQUEST_URL5P1 = 'http://10.33.171.16:8080/C360/api/helloworld5/compte/';
+var REQUEST_URL5P2 = '/events/'
 var REQUEST_URL5 = ''
-var REQUEST_URL8P1 = 'http://10.33.171.28:8080/C360/api/helloworld8/compte/';
-var REQUEST_URL8P2 = '/events'
-var REQUEST_URL8 = ''
-var REQUEST_URL9P1 = 'http://10.33.171.28:8080/C360/api/helloworld8/compte/';
-var REQUEST_URL9P2 = '/events'
+var REQUEST_URL9P1 = 'http://10.33.171.16:8080/C360/api/helloworld9/compte/';
+var REQUEST_URL9P2 = '/events/'
 var REQUEST_URL9 = ''
+var REQUEST_URL10P1 = 'http://10.33.171.16:8080/C360/api/helloworld10/compte/';
+var REQUEST_URL10P2 = '/events/'
+var REQUEST_URL10 = ''
+var REQUEST_URL11P1 = 'http://10.33.171.16:8080/C360/api/helloworld11/compte/';
+var REQUEST_URL11P2 = '/events/'
+var REQUEST_URL11 = ''
 //var carte='https://www.google.fr/maps/place/Rue+de+Paris,+92100+Boulogne-Billancourt/@48.8411462,2.2379902,17z/data=!3m1!4b1!4m2!3m1!1s0x47e67add04bbdb5b:0xaab81bad228d86ad'
 
 function addZero(i) {
@@ -59,63 +62,73 @@ class EventDetails extends React.Component{
   }
 
   _acceptEvent(){
-    this.setState({statut: 'Je participe.'});
     fetch(REQUEST_URL7)
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
-        REQUEST_URL5=REQUEST_URL5P1+responseData+REQUEST_URL5P2;
+        REQUEST_URL5=REQUEST_URL5P1+responseData+REQUEST_URL5P2+this.props.event.id;
         console.log(REQUEST_URL5);
-
-        fetch(REQUEST_URL5, {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json'
-        },
-          body: JSON.stringify({
-            "id": this.props.event.id,
-            "event": this.props.event.event,
-            "date": this.props.event.date,
-            "description": this.props.event.description,
-            "motclefs": this.props.event.motclefs,
-            "lieu": this.props.event.lieu,
+        fetch(REQUEST_URL5)
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log(responseData);
           })
+          .done()
         })
-
-      })
       .done();
+      //this.setState({statut: 'Je participe.'});
   }
 
   _refuseEvent(){
-    this.setState({statut: 'Je ne participe pas.'});
+
     fetch(REQUEST_URL7)
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
-        REQUEST_URL8=REQUEST_URL8P1+responseData+REQUEST_URL8P2;
-        console.log(REQUEST_URL8);
-
-        fetch(REQUEST_URL8, {
-          method: 'POST',
-          headers: {
-          'Content-Type': 'application/json'
-        },
-          body: JSON.stringify({
-            "id": this.props.event.id,
-            "event": this.props.event.event,
-            "date": this.props.event.date,
-            "description": this.props.event.description,
-            "motclefs": this.props.event.motclefs,
-            "lieu": this.props.event.lieu,
+        REQUEST_URL9=REQUEST_URL9P1+responseData+REQUEST_URL9P2+this.props.event.id;
+        console.log(REQUEST_URL9);
+        fetch(REQUEST_URL9)
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log(responseData);
           })
+          .done()
         })
-
-      })
       .done();
+      //this.setState({statut: 'Je ne participe pas.'});
   }
   render() {
     var REQUEST_URL7main=this.props.email;
     REQUEST_URL7=REQUEST_URL7P1+REQUEST_URL7main+REQUEST_URL7P2;
+    fetch(REQUEST_URL7)
+      .then((response) => response.json())
+      .then((responseData1) => {
+        REQUEST_URL11=REQUEST_URL11P1+responseData1+REQUEST_URL11P2+this.props.event.id;
+        fetch(REQUEST_URL11)
+        .then((response) => response.json())
+        .then((responseData2) => {
+          if(responseData2===true){
+            this.setState({statut: ''});
+          }
+          else{
+            REQUEST_URL10=REQUEST_URL10P1+responseData1+REQUEST_URL10P2+this.props.event.id;
+            fetch(REQUEST_URL10)
+            .then((response) => response.json())
+            .then((responseData3) => {
+              if(responseData3===true){
+                  this.setState({statut: 'Je participe.'});
+              }
+              else{
+                  this.setState({statut: 'Je ne participe pas.'});
+              }
+            })
+            .done();
+          }
+        })
+        .done();
+        })
+      .done();
+
     console.log(REQUEST_URL7);
       var event = this.props.event;
       var email = this.props.email;

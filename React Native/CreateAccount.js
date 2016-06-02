@@ -22,8 +22,8 @@ height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
-const REQUEST_URL2 = 'http://10.33.171.28:8080/C360/api/helloworld2';
-const REQUEST_URL4 = 'http://10.33.171.28:8080/C360/api/helloworld4';
+const REQUEST_URL2 = 'http://10.33.171.16:8080/C360/api/helloworld2';
+const REQUEST_URL4 = 'http://10.33.171.16:8080/C360/api/helloworld4';
 
 
 class CreateAccount extends React.Component{
@@ -101,7 +101,7 @@ class CreateAccount extends React.Component{
 
     _pushToHomePage(email){
       this.props.navigator.replace({
-        id : 'homepage',
+        id : 'newpage',
         passProps:{
                    email:email
                  },
