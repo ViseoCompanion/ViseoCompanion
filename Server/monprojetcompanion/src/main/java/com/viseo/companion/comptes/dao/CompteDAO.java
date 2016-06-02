@@ -1,6 +1,7 @@
 package com.viseo.companion.comptes.dao;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +10,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.hibernate.mapping.Set;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -115,9 +117,6 @@ public class CompteDAO {
 		compte.addCompteEvent(compteEvent);
 		
 		em.merge(compteEvent);
-		System.out.println("******************************************");
-		System.out.println(compteEvent.getPk());
-		System.out.println("******************************************");
 	}
 	
 	@Transactional
@@ -137,31 +136,23 @@ public class CompteDAO {
 		compte.addCompteEvent(compteEvent);
 		
 		em.merge(compteEvent);
-		System.out.println("******************************************");
-		System.out.println(compteEvent.getPk());
-		System.out.println("******************************************");
 	}
 	
 	@Transactional
 	public boolean getParticipation(int idCompte,int idEvent){
-		CompteEvent compteEvent = new CompteEvent();
-		
-		Compte compte=new Compte();
-		compte.setId(idCompte);
-		compteEvent.setCompte(compte);
-		
+		java.util.Set<CompteEvent> result = new HashSet<CompteEvent>();
+		Compte compte=new Compte();		
 		Event event=new Event();
-		event.setId(idEvent);
-		compteEvent.setEvent(event);
-		System.out.println("******************************************");
-		System.out.println(compteEvent.getPk());
-		System.out.println("******************************************");
-		return compteEvent.isParticipated();
+		
+		compte = getCompte(idCompte);
+		java.util.Set<CompteEvent> compteEvent1 = compte.getCompteEvents();
+		
+		event = getEvent(idEvent);
+		java.util.Set<CompteEvent> compteEvent2 = event.getCompteEvents();
+		
+		result.clear();
+		result.addAll(compteEvent1);
+		result.retainAll(compteEvent2);
+		return result.iterator().next().isParticipated();
 	}
-
-
-//		System.out.println("******************************************");
-//		System.out.println(em.find(CompteEvent.class, idCompte).getEvent().getId());
-//		System.out.println("******************************************");
-
 }
