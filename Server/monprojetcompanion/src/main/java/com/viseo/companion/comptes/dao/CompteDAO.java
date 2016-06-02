@@ -2,22 +2,21 @@ package com.viseo.companion.comptes.dao;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.Date;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.ParameterExpression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import com.viseo.companion.comptes.domain.Compte;
-import com.viseo.companion.evenements.domain.*;
+import com.viseo.companion.compteEvents.domain.CompteEvent;
+import com.viseo.companion.compteEvents.domain.CompteEventID;
+import com.viseo.companion.evenements.domain.Event;;
 
 
 @Repository
@@ -25,10 +24,7 @@ public class CompteDAO {
 
 	@PersistenceContext
 	EntityManager em;
-
-
-
-
+	
 	@Transactional
 	public Compte getCompte(int id){
 		return em.find(Compte.class, id);
@@ -43,25 +39,9 @@ public class CompteDAO {
 		em.persist(compte);
 		
 	}
-	
-//	@Transactional
-//	public void addEventToCompte(long id, Set<Event> event){
-//		Compte compte=getCompte(id);
-//		compte.setEvents(event);
-//		em.persist(compte);
-//		
-//	}
-	
 	@Transactional
-	public void addEventToCompte(int id,Event myEvent){
-		Compte compte=getCompte(id);
-		compte.getEvents().add(myEvent);
-	}
-	
-	@Transactional
-	public void deleteEventFromCompte(int id,Event myEvent){
-		Compte compte=getCompte(id);
-		compte.getEvents().remove(myEvent);
+	public Event getEvent(int id){
+		return em.find(Event.class, id);
 	}
 
 	@Transactional
@@ -69,7 +49,7 @@ public class CompteDAO {
 		em.persist(compte);
 	}
 
-
+	@Transactional
 	public boolean isCompteAlreadySaved(String myCompte){
 
 		Collection<Compte> list = null;
@@ -84,7 +64,7 @@ public class CompteDAO {
 
 		return !list.isEmpty(); //return true if the list is not avoid
 	}
-	
+	@Transactional
 	public boolean isAuthenticater(String Email, String Password){
 		
 		Collection<Compte> list = null;
@@ -99,22 +79,18 @@ public class CompteDAO {
 		Predicate predicate = builder.and(usereq,pwdeq);
 		cq.where(predicate);
 		//execution
-		/*Compte compte =em.createQuery(cq).getSingleResult();*/
 		list=(Collection<Compte>) em.createQuery(cq).getResultList();
 		
 		return !list.isEmpty();
 		
 	}
-
+	@Transactional
 	public List<Compte> GetAllCompte() {
 		
 		return em.createQuery("select a from Compte a", Compte.class).getResultList();
 	}
 
-	public Compte getCompteByEmail(String email) {
-		return em.find(Compte.class, email);
-		
-	}
+	@Transactional
 	public Object GetCompteByEmail(String emailDemande) {
 		
 		return em.createQuery("SELECT id FROM Compte WHERE email LIKE :emailCompte")
@@ -122,38 +98,70 @@ public class CompteDAO {
 				.getResultList().get(0);
 	}
 
-/*	public boolean isThereOneSessionFormationAlreadyPlanned(SessionFormation sf){
-
-		Collection<SessionFormation> list = null;
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-
-		  CriteriaQuery<SessionFormation> q = cb.createQuery(SessionFormation.class);
-		  Root<SessionFormation> c = q.from(SessionFormation.class);
-		  //ParameterExpression<String> p = cb.parameter(String.class);
-
-		  q.select(c).where(cb.equal(c.get("formation"), sf.getFormation().getId()),
-				  cb.or(
-					  cb.and(
-						  cb.greaterThanOrEqualTo(c.<Date>get("debut"), sf.getDebut()),
-						  cb.lessThan(c.<Date>get("debut"), sf.getFin())
-						  ),
-					  cb.and(
-							  cb.greaterThan(c.<Date>get("fin"), sf.getDebut()),
-							  cb.lessThanOrEqualTo(c.<Date>get("fin"), sf.getFin())
-						  ),
-					  cb.and(
-							  cb.lessThanOrEqualTo(c.<Date>get("debut"), sf.getDebut()),
-							  cb.greaterThanOrEqualTo(c.<Date>get("fin"), sf.getFin())
-						  )
-					  )
-		  );
-
-		  list = (Collection<SessionFormation>) em.createQuery(q).getResultList();
-
-		return !list.isEmpty();
+	@Transactional
+	public void addEventToCompte(int idCompte,int idEvent){
+		CompteEvent compteEvent = new CompteEvent();
+		
+		Compte compte=new Compte();
+		compte.setId(idCompte);
+		compteEvent.setCompte(compte);
+		
+		Event event=new Event();
+		event.setId(idEvent);
+		compteEvent.setEvent(event);
+		
+		compteEvent.setParticipated(true);
+		
+		compte.addCompteEvent(compteEvent);
+		
+		em.merge(compteEvent);
+		System.out.println("******************************************");
+		System.out.println(compteEvent.getPk());
+		System.out.println("******************************************");
+	}
+	
+	@Transactional
+	public void cancelEventFromCompte(int idCompte,int idEvent){
+		CompteEvent compteEvent = new CompteEvent();
+		
+		Compte compte=new Compte();
+		compte.setId(idCompte);
+		compteEvent.setCompte(compte);
+		
+		Event event=new Event();
+		event.setId(idEvent);
+		compteEvent.setEvent(event);
+		
+		compteEvent.setParticipated(false);
+		
+		compte.addCompteEvent(compteEvent);
+		
+		em.merge(compteEvent);
+		System.out.println("******************************************");
+		System.out.println(compteEvent.getPk());
+		System.out.println("******************************************");
+	}
+	
+	@Transactional
+	public boolean getParticipation(int idCompte,int idEvent){
+		CompteEvent compteEvent = new CompteEvent();
+		
+		Compte compte=new Compte();
+		compte.setId(idCompte);
+		compteEvent.setCompte(compte);
+		
+		Event event=new Event();
+		event.setId(idEvent);
+		compteEvent.setEvent(event);
+		System.out.println("******************************************");
+		System.out.println(compteEvent.getPk());
+		System.out.println("******************************************");
+		return compteEvent.isParticipated();
 	}
 
-	public boolean hasCorrectDates(SessionFormation mySessionFormation){
-		return mySessionFormation.getDebut().before(mySessionFormation.getFin());
-	}*/
+
+//		System.out.println("******************************************");
+//		System.out.println(em.find(CompteEvent.class, idCompte).getEvent().getId());
+//		System.out.println("******************************************");
+
 }

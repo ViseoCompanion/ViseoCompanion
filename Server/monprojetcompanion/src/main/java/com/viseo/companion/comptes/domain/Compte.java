@@ -2,62 +2,62 @@ package com.viseo.companion.comptes.domain;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.Email;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.viseo.companion.evenements.*;
 import com.viseo.companion.evenements.domain.Event;
+import com.viseo.companion.compteEvents.domain.CompteEvent;
 
 @Entity
-public class Compte{
-	@Id
-	@GeneratedValue
-	@Column(name = "COMPTE_ID")
-	private int id;
+@Table(name = "compte")
+public class Compte implements java.io.Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	private int idCompte;
 	private String email;
 	private String password;
-	private Set<Event> events;
 	
-//	public Compte() {
-//		super();
-//		// TODO Auto-generated constructor stub
-//	}
+	private Set<CompteEvent> compteEvents = new HashSet<CompteEvent>();
+	
+	public Compte() {
+	}
+	
+	public Compte(String email,String password){
+		this.email = email;
+		this.password = password;
+	}
+	
+	public void addEvent(CompteEvent event){
+		this.compteEvents.add(event);
+	}
 	
 	@Id
 	@GeneratedValue
 	@Column(name = "COMPTE_ID")
 	public int getId() {
-		return id;
+		return idCompte;
 	}
 	
-	@NotNull
 	@Column(name = "EMAIL")
 	public String getEmail(){
 		return email;
 	}
 	
-	@NotNull
 	@Column(name = "PASSWORD")
 	public String getPassword(){
 		return password;
 	}
 	
 	public void setId(int id){
-		this.id=id;
+		this.idCompte=id;
 		
 	}
 	public void setEmail(String email){
@@ -68,26 +68,19 @@ public class Compte{
 	public void setPassword(String password){
 		this.password=password;
 	}
-	@JsonIgnore
-	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "COMPTE_EVENT", joinColumns = { @JoinColumn(name = "COMPTE_ID") }, inverseJoinColumns = { @JoinColumn(name = "EVENT_ID") })
-//	private List<Event> eventList;
-//	
-//	public List<Event> getEvents(){
-//		return eventList;
-//	}
-//	public void setEvents(List<Event> eventList){
-//		this.eventList=eventList;
-//	}
-	
-	public Set<Event> getEvents(){
-		return events;
+
+	@OneToMany(mappedBy = "pk.compte", cascade=CascadeType.ALL)
+	public Set<CompteEvent> getCompteEvents(){
+		return compteEvents;
 	}
-	public void setEvents(Set<Event> events){
-		this.events = events;
+
+	public void setCompteEvents(Set<CompteEvent> compteEvents){
+		this.compteEvents = compteEvents;
 	}
 	
-	
+	public void addCompteEvent(CompteEvent compteEvent){
+		this.compteEvents.add(compteEvent);
+	}
 }
 	
 	

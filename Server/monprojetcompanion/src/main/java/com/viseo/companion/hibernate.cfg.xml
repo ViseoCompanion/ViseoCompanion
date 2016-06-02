@@ -11,5 +11,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <mapping class="com.viseo.companion.comptes.domain.Compte"/>
         <mapping class="com.viseo.companion.evenements.domain.Event"/>
+        <mapping class="com.viseo.companion.compteEvents.domain.CompteEvent"/>
+        <mapping class="com.viseo.companion.compteEvents.domain.CompteEventID"/>
     </session-factory>
 </hibernate-configuration>
