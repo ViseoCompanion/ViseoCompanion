@@ -155,4 +155,22 @@ public class CompteDAO {
 		result.retainAll(compteEvent2);
 		return result.iterator().next().isParticipated();
 	}
+	
+	@Transactional
+	public boolean isSetParticipation(int idCompte,int idEvent){
+		java.util.Set<CompteEvent> result = new HashSet<CompteEvent>();
+		Compte compte=new Compte();		
+		Event event=new Event();
+		
+		compte = getCompte(idCompte);
+		java.util.Set<CompteEvent> compteEvent1 = compte.getCompteEvents();
+		
+		event = getEvent(idEvent);
+		java.util.Set<CompteEvent> compteEvent2 = event.getCompteEvents();
+		
+		result.clear();
+		result.addAll(compteEvent1);
+		result.retainAll(compteEvent2);
+		return result.isEmpty();
+	}
 }

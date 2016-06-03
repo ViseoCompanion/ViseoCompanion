@@ -103,7 +103,7 @@ public class Event implements java.io.Serializable
 		this.lieu=lieu;
 	}
 	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.event", cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.event", cascade = CascadeType.ALL)
 	@JsonBackReference
 	public Set<CompteEvent> getCompteEvents(){
 		return compteEvents;

@@ -70,7 +70,7 @@ public class Compte implements java.io.Serializable{
 		this.password=password;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "pk.compte", cascade=CascadeType.ALL)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "pk.compte", cascade=CascadeType.ALL)
 	@JsonBackReference
 	public Set<CompteEvent> getCompteEvents(){
 		return compteEvents;

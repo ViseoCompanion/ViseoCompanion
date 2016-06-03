@@ -86,4 +86,10 @@ public class CompteWS {
     public boolean getParticipationCompteEvent(@PathVariable("idCompte") int idCompte,@PathVariable("idEvent") int idEvent){
 		return compteDAO.getParticipation(idCompte,idEvent);
 	}
+	
+	@RequestMapping(value = "${endpoint.helloworld11}", method = RequestMethod.GET)
+    @ResponseBody
+    public boolean isAllreadySetParticipation(@PathVariable("idCompte") int idCompte,@PathVariable("idEvent") int idEvent){
+		return compteDAO.isSetParticipation(idCompte,idEvent);
+	}
 }
