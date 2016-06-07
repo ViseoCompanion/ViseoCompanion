@@ -24,23 +24,26 @@ height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
-var id=2;
-var REQUEST_URL7P1 = 'http://10.33.171.16:8080/C360/api/helloworld7/compte/';
+var REQUEST_URL7P1 = 'http://10.33.171.12:8080/C360/api/helloworld7/compte/';
 var REQUEST_URL7P2 = '/events'
 var REQUEST_URL7 = ''
-var REQUEST_URL5P1 = 'http://10.33.171.16:8080/C360/api/helloworld5/compte/';
+
+var REQUEST_URL5P1 = 'http://10.33.171.12:8080/C360/api/helloworld5/compte/';
 var REQUEST_URL5P2 = '/events/'
 var REQUEST_URL5 = ''
-var REQUEST_URL9P1 = 'http://10.33.171.16:8080/C360/api/helloworld9/compte/';
+
+var REQUEST_URL9P1 = 'http://10.33.171.12:8080/C360/api/helloworld9/compte/';
 var REQUEST_URL9P2 = '/events/'
 var REQUEST_URL9 = ''
-var REQUEST_URL10P1 = 'http://10.33.171.16:8080/C360/api/helloworld10/compte/';
+
+var REQUEST_URL10P1 = 'http://10.33.171.12:8080/C360/api/helloworld10/compte/';
 var REQUEST_URL10P2 = '/events/'
 var REQUEST_URL10 = ''
-var REQUEST_URL11P1 = 'http://10.33.171.16:8080/C360/api/helloworld11/compte/';
+
+var REQUEST_URL11P1 = 'http://10.33.171.12:8080/C360/api/helloworld11/compte/';
 var REQUEST_URL11P2 = '/events/'
 var REQUEST_URL11 = ''
-//var carte='https://www.google.fr/maps/place/Rue+de+Paris,+92100+Boulogne-Billancourt/@48.8411462,2.2379902,17z/data=!3m1!4b1!4m2!3m1!1s0x47e67add04bbdb5b:0xaab81bad228d86ad'
+
 
 function addZero(i) {
   if (i < 10) {
@@ -54,50 +57,18 @@ class EventDetails extends React.Component{
 
   constructor(props) {
     super(props);
-    this._acceptEvent=this._acceptEvent.bind(this);
-    this._refuseEvent=this._refuseEvent.bind(this);
+    this._showParticipation=this._showParticipation.bind(this);
     this.state = {
       statut:'',
     };
   }
 
-  _acceptEvent(){
-    fetch(REQUEST_URL7)
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log(responseData);
-        REQUEST_URL5=REQUEST_URL5P1+responseData+REQUEST_URL5P2+this.props.event.id;
-        console.log(REQUEST_URL5);
-        fetch(REQUEST_URL5)
-        .then((response) => response.json())
-        .then((responseData) => {
-          console.log(responseData);
-          })
-          .done()
-        })
-      .done();
-      //this.setState({statut: 'Je participe.'});
+  componentDidMount() {
+    this._showParticipation();
   }
 
-  _refuseEvent(){
-
-    fetch(REQUEST_URL7)
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log(responseData);
-        REQUEST_URL9=REQUEST_URL9P1+responseData+REQUEST_URL9P2+this.props.event.id;
-        console.log(REQUEST_URL9);
-        fetch(REQUEST_URL9)
-        .then((response) => response.json())
-        .then((responseData) => {
-          console.log(responseData);
-          })
-          .done()
-        })
-      .done();
-      //this.setState({statut: 'Je ne participe pas.'});
-  }
-  render() {
+  _showParticipation(){
+    console.log("showParticipation");
     var REQUEST_URL7main=this.props.email;
     REQUEST_URL7=REQUEST_URL7P1+REQUEST_URL7main+REQUEST_URL7P2;
     fetch(REQUEST_URL7)
@@ -116,10 +87,12 @@ class EventDetails extends React.Component{
             .then((response) => response.json())
             .then((responseData3) => {
               if(responseData3===true){
-                  this.setState({statut: 'Je participe.'});
+                this.setState({statut_color: 'green'});
+                this.setState({statut: 'Je participe.'});
               }
               else{
-                  this.setState({statut: 'Je ne participe pas.'});
+                this.setState({statut_color: 'red'});
+                this.setState({statut: 'Je ne participe pas.'});
               }
             })
             .done();
@@ -129,12 +102,53 @@ class EventDetails extends React.Component{
         })
       .done();
 
-    console.log(REQUEST_URL7);
-      var event = this.props.event;
-      var email = this.props.email;
-      console.log(event);
-      console.log(email);
-      return (
+  }
+
+  _acceptEvent(){
+    fetch(REQUEST_URL7)
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+        REQUEST_URL5=REQUEST_URL5P1+responseData+REQUEST_URL5P2+this.props.event.id;
+        console.log(REQUEST_URL5);
+        fetch(REQUEST_URL5)
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log(responseData);
+          })
+          .done()
+        })
+      .done();
+      this.setState({statut: 'Je participe.'});
+      this.setState({statut_color: 'green'});
+  }
+
+  _refuseEvent(){
+
+    fetch(REQUEST_URL7)
+      .then((response) => response.json())
+      .then((responseData) => {
+        console.log(responseData);
+        REQUEST_URL9=REQUEST_URL9P1+responseData+REQUEST_URL9P2+this.props.event.id;
+        console.log(REQUEST_URL9);
+        fetch(REQUEST_URL9)
+        .then((response) => response.json())
+        .then((responseData) => {
+          console.log(responseData);
+          })
+          .done()
+        })
+      .done();
+      this.setState({statut: 'Je ne participe pas.'});
+      this.setState({statut_color: 'red'});
+  }
+  render() {
+    //  var REQUEST_URL7main=this.props.email;
+    //  REQUEST_URL7=REQUEST_URL7P1+REQUEST_URL7main+REQUEST_URL7P2;
+     //this._showParticipation();
+     var event = this.props.event;
+     var email = this.props.email;
+     return (
 
 <View>
 			<View style={styles.topbar}>
@@ -147,7 +161,7 @@ class EventDetails extends React.Component{
     <View style={styles.titre_et_statutContainer}>
         <View style={styles.titre_et_statut} >
     		<Text style={styles.title}>Evénement:</Text>
-        <Text style={styles._statut}>{this.state.statut}</Text>
+        <Text style={[{color:this.state.statut_color}]}>{this.state.statut}</Text>
         </View>
     </View>
     <View style={styles.maincontainer}>
@@ -226,15 +240,13 @@ class EventDetails extends React.Component{
 
                 </View>
             </View>
-
-
-
         </View>
       </View>
 
 </View>
 
     );
+
   }
 }
 
