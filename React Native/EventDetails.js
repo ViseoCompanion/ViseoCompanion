@@ -44,6 +44,10 @@ var REQUEST_URL11P1 = 'http://10.33.171.12:8080/C360/api/helloworld11/compte/';
 var REQUEST_URL11P2 = '/events/'
 var REQUEST_URL11 = ''
 
+const okButton= require('./okButton.png');
+const okButton2= require('./okButton2.png');
+const crossButton= require('./crossButton.png');
+const crossButton2= require('./crossButton2.png');
 
 function addZero(i) {
   if (i < 10) {
@@ -60,6 +64,8 @@ class EventDetails extends React.Component{
     this._showParticipation=this._showParticipation.bind(this);
     this.state = {
       statut:'',
+      _okButton:'',
+      _crossButton:''
     };
   }
 
@@ -87,12 +93,16 @@ class EventDetails extends React.Component{
             .then((response) => response.json())
             .then((responseData3) => {
               if(responseData3===true){
-                this.setState({statut_color: 'green'});
-                this.setState({statut: 'Je participe.'});
+                this.setState({statut_color: 'green',
+                               statut: 'Je participe.',
+                               _okButton: okButton2,
+                               _crossButton: crossButton});
               }
               else{
-                this.setState({statut_color: 'red'});
-                this.setState({statut: 'Je ne participe pas.'});
+                this.setState({statut_color: 'red',
+                               statut: 'Je ne participe pas.',
+                               _okButton: okButton,
+                               _crossButton: crossButton2});
               }
             })
             .done();
@@ -119,8 +129,10 @@ class EventDetails extends React.Component{
           .done()
         })
       .done();
-      this.setState({statut: 'Je participe.'});
-      this.setState({statut_color: 'green'});
+      this.setState({statut: 'Je participe.',
+                     statut_color: 'green',
+                     _okButton: okButton2,
+                     _crossButton: crossButton});
   }
 
   _refuseEvent(){
@@ -139,8 +151,10 @@ class EventDetails extends React.Component{
           .done()
         })
       .done();
-      this.setState({statut: 'Je ne participe pas.'});
-      this.setState({statut_color: 'red'});
+      this.setState({statut: 'Je ne participe pas.',
+                    statut_color: 'red',
+                    _okButton: okButton,
+                    _crossButton: crossButton2});
   }
   render() {
     //  var REQUEST_URL7main=this.props.email;
@@ -231,11 +245,11 @@ class EventDetails extends React.Component{
               </TouchableOpacity>
                 <View style={styles.ok_cross_ButtonContainer}>
                     <TouchableOpacity onPress={() =>this._acceptEvent()}>
-                    <Image source={require('./okButton.png')} style={styles.okButton} ></Image>
+                    <Image source={this.state._okButton} style={styles.okButton} ></Image>
                     </TouchableOpacity>
                     <View style={styles.separator}></View>
                     <TouchableOpacity onPress={() =>this._refuseEvent()}>
-                    <Image source={require('./crossButton.png')} style={styles.crossButton} ></Image>
+                    <Image source={this.state._crossButton} style={styles.crossButton} ></Image>
                     </TouchableOpacity>
 
                 </View>
