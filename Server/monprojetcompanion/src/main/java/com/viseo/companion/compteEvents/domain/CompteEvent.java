@@ -26,7 +26,6 @@ import com.viseo.companion.evenements.domain.Event;
 public class CompteEvent implements java.io.Serializable {
 	
 	private CompteEventID pk = new CompteEventID();
-	
 	private boolean participation;
 	
 	@EmbeddedId

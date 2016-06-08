@@ -23,8 +23,7 @@ height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
-//var REQUEST_URL = 'http://10.0.2.2:8080/C360/api/he10.33.170.239lloworld2';
-const REQUEST_URL3 = 'http://10.33.171.16:8080/C360/api/helloworld3';
+const REQUEST_URL3 = 'http://10.33.170.242:8080/C360/api/compte/Authentification';
 
 class LoginPage extends React.Component{
 
@@ -170,174 +169,159 @@ render(){
 
 const styles = StyleSheet.create({
 
-topbar:{
-    backgroundColor: 'grey',
-    height:0.1*deviceHeight,
+    topbar:{
+        backgroundColor: 'grey',
+        height:0.1*deviceHeight,
+    },
 
-},
+    viseocompanion:
+    {
+        justifyContent:'center',
+        textAlign: 'center',
+        fontSize:20,
+        color:'black',
+    },
 
-viseocompanion:
-{
-    justifyContent:'center',
-    textAlign: 'center',
-    fontSize:20,
-    color:'black',
+    container:
+    {
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        flexDirection:'column',
+        height:0.85*deviceHeight,
+    },
+    blankcontainer:
+    {
+        flexDirection:'row',
+        height:0.02*deviceHeight
+    },
 
-},
+    blankcontainer2:
+    {
+        flexDirection:'row',
+        height:0.1*deviceHeight
+    },
+    blankcontainer3:
+    {
+        flexDirection:'row',
+        height:0.05*deviceHeight
+    },
 
-container:
-{
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flexDirection:'column',
-    height:0.85*deviceHeight,
+    titlecontainer:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.05*deviceHeight
+    },
 
+    title:
+    {
+      fontSize:20,
+      color:'black',
+      justifyContent:'center',
+      alignItems:'center',
+    },
 
-},
-blankcontainer:
-{
-    flexDirection:'row',
-    height:0.02*deviceHeight
-},
+    emailcontainer:
+    {
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent: 'center',
+      height:0.1*deviceHeight
+    },
 
-blankcontainer2:
-{
-    flexDirection:'row',
-    height:0.1*deviceHeight
-},
-blankcontainer3:
-{
-    flexDirection:'row',
-    height:0.05*deviceHeight
-},
+    passwordcontainer:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.1*deviceHeight
+    },
 
-titlecontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.05*deviceHeight
-},
+    buttoncontainer:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.1*deviceHeight
+    },
 
-title:
-{
-  fontSize:20,
-  color:'black',
-  justifyContent:'center',
-  alignItems:'center',
+    passwordforgotcontainer:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.1*deviceHeight
+    },
 
-},
+    errorcontainer:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.02*deviceHeight
+    },
 
-emailcontainer:
-{
-  flexDirection:'row',
-  alignItems:'center',
-  justifyContent: 'center',
-  height:0.1*deviceHeight
-},
+    createaccountcontainer:
+    {
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.1*deviceHeight
+    },
 
-passwordcontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.1*deviceHeight
-},
+    emailInput:{
+        alignItems:'center',
+        width: 0.7*deviceWidth,
+        textAlign:'center',
+    },
 
-buttoncontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.1*deviceHeight
-},
+    passwordInput:{
+        alignItems:'center',
+        width: 0.7*deviceWidth,
+        textAlign:'center',
+    },
 
-passwordforgotcontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.1*deviceHeight
-},
+    okButton:{
+        width:0.25*deviceWidth,
+        height:0.08*deviceHeight,
+        borderColor:'black',
+        borderWidth:2,
+        justifyContent:'center',
+        alignItems:'center',
+    },
 
-errorcontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.02*deviceHeight
-},
+    okText:{
+        fontSize:25,
+        color:'black',
+    },
 
-createaccountcontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.1*deviceHeight
-},
+    errorText:{
+        fontSize:15,
+        color:'red',
+    },
 
-emailInput:{
-    alignItems:'center',
-    width: 0.7*deviceWidth,
-    textAlign:'center',
-},
+    createText:{
+        fontSize:15,
+        color:'black',
+    },
 
-passwordInput:{
+    forgotText:{
+        fontSize:15,
+        color:'brown',
+        fontStyle:'italic',
+        textDecorationLine:'underline',
+        textDecorationStyle:'dotted'
+    },
 
-  alignItems:'center',
-  width: 0.7*deviceWidth,
-  textAlign:'center',
-},
+    scrollView:{
+        height : deviceHeight,
+    },
 
-okButton:{
-width:0.25*deviceWidth,
-height:0.08*deviceHeight,
-borderColor:'black',
-borderWidth:2,
-justifyContent:'center',
-alignItems:'center',
-
-},
-
-okText:{
-  fontSize:25,
-  color:'black',
-},
-
-errorText:{
-  fontSize:15,
-  color:'red',
-},
-
-createText:{
-  fontSize:15,
-  color:'black',
-},
-
-forgotText:{
-  fontSize:15,
-  color:'brown',
-  fontStyle:'italic',
-  textDecorationLine:'underline',
-  textDecorationStyle:'dotted'
-},
-
-scrollView:{
-  height : deviceHeight,
-
-},
-error_message : {
-color : 'red',
-
-}
-
-
-
-
-
+    error_message : {
+        color : 'red',
+    }
 });
-
-
 
 module.exports=LoginPage;

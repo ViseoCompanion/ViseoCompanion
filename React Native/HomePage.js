@@ -24,31 +24,29 @@ import{
 var monthNames = ["Janv", "Fév", "Mars", "Avril", "Mai", "Juin",
   "Juill", "Août", "Sept", "Oct", "Nov", "Déc"
 ];
-var {
-height: deviceHeight,
-width : deviceWidth,
-} = Dimensions.
-get('window');
 
-function ThreePoints(text)
-{
-if(text.length>25) {
-  text=text.substr(0,25) + "...";
-}
-return text;
+var {
+    height: deviceHeight,
+    width : deviceWidth,
+  } = Dimensions.get('window');
+
+function ThreePoints(text){
+    if(text.length>25) {
+      text=text.substr(0,25) + "...";
+    }
+    return text;
 }
 
 function addZero(i) {
-  if (i < 10) {
-      i = "0" + i;
-  }
-  return i;
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
 }
 
-var REQUEST_URL = 'http://10.33.171.16:8080/C360/api/helloworld';
+var REQUEST_URL = 'http://10.33.170.242:8080/C360/api/event/readEvent';
 
 class HomePage extends React.Component {
-
 
   constructor(props) {
     super(props);
@@ -61,9 +59,7 @@ class HomePage extends React.Component {
     };
   }
 
-
   componentDidMount() {
-
     this.fetchData();
   }
 
@@ -94,7 +90,7 @@ class HomePage extends React.Component {
   _onRefresh() {
     this.setState({refreshing: true});
     this.fetchData()
-    }
+  }
 
   render() {
     var email = this.props.email;
@@ -103,34 +99,33 @@ class HomePage extends React.Component {
       return this.renderLoadingView();
     }
 
-  return(
-    <View>
-        <View style={styles.topbar}>
-          <View style={styles.menu0}>
-          <Image  source={require('./Menu-52.png')} style={styles.icon}/>
+    return(
+      <View>
+          <View style={styles.topbar}>
+            <View style={styles.menu0}>
+            <Image  source={require('./Menu-52.png')} style={styles.icon}/>
+            </View>
+            <Text style={styles.viseocompanion}> VISEO COMPANION </Text>
           </View>
-          <Text style={styles.viseocompanion}> VISEO COMPANION </Text>
-        </View>
 
-        <Text style={styles.title}>  Evénements:</Text>
+          <Text style={styles.title}>  Evénements:</Text>
 
-      <ScrollView
-          refreshControl={
-            <RefreshControl
-            refreshing={this.state.refreshing}
-            onRefresh={this._onRefresh.bind(this)}
+        <ScrollView
+            refreshControl={
+              <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+              />}
+            scrollEventThrottle={200}
+            style={styles.scrollView}>
+            <ListView
+              navigator={this.props.navigator}
+              dataSource={this.state.dataSource}
+              renderRow={this.renderRow.bind(this)}
             />
-          }
-          scrollEventThrottle={200}
-          style={styles.scrollView}>
-          <ListView
-            navigator={this.props.navigator}
-            dataSource={this.state.dataSource}
-            renderRow={this.renderRow.bind(this)}
-          />
-        </ScrollView>
-    </View>
-);
+          </ScrollView>
+      </View>
+  );
 }
 
 renderLoadingView() {
@@ -174,10 +169,9 @@ const styles = StyleSheet.create({
       backgroundColor : 'white',
       /*justifyContent:'space-between',*/
       flexDirection:'row',
-
   },
-  menu : {
 
+  menu:{
       width:(1/14)*deviceHeight,
       height:(1/14)*deviceHeight,
       backgroundColor:'white',
@@ -186,11 +180,12 @@ const styles = StyleSheet.create({
       borderColor: 'black',
       justifyContent : 'flex-start',
       margin:5,
-
   },
-  menu0 : {
+
+  menu0:{
       width : 85,
   },
+
   icon:{
       width:25,
       height:25,
@@ -221,103 +216,81 @@ const styles = StyleSheet.create({
       backgroundColor:'white',
   },
 
-
-
-
   container: {
-
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flexDirection:'column',
+      borderRadius: 30,
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+      flexDirection:'column',
   },
 
-  loadingContainer: {
-
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flexDirection:'row',
-    height:deviceHeight
+  loadingContainer:{
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: '#F5FCFF',
+      flexDirection:'row',
+      height:deviceHeight
   },
 
-  /*events: {
-    flex: 1,
-    flexDirection : 'row',
-  },*/
+  rectangle:{
+      width: 0.97*deviceWidth,
+      height: 0.2*deviceHeight,
+      backgroundColor: 'white',
+      margin :3,
+      borderRadius:0,
+      borderWidth: 0.3,
+      borderColor: 'black',
+      flexDirection:'row',
+  },
 
+  leftRectangle:{
+      flex:3,
+  },
 
-  rectangle: {
+  rightRectangle:{
+      flex:5,
+  },
 
-        width: 0.97*deviceWidth,
-        height: 0.2*deviceHeight,
-        backgroundColor: 'white',
-        margin :3,
-        borderRadius:0,
-        borderWidth: 0.3,
-        borderColor: 'black',
-        flexDirection:'row',
-        /*fontFamily: 'New Times Roman',*/
+  lines:{
+      fontSize: 30,
+      color: 'black',
+  },
 
+  toolbar:{
+      backgroundColor:'white',
+  },
 
-    },
-    leftRectangle:{
-        flex:3,
+  date:{
+      textAlign: 'center',
+      color: 'black',
+      fontSize:20,
+  },
 
-    },
+  hour:{
+      textAlign: 'left',
+      color:'black',
+      fontSize:20,
+  },
 
-    rightRectangle:{
+  name:{
+      textAlign: 'left',
+      color: 'black',
+      marginBottom: 10,
+  },
 
-        flex:5,
+  location:{
+      textAlign : 'left',
+      color:'black',
+      marginBottom:10,
+  },
 
-    },
+  description: {
+      textAlign :'left',
+      color : 'black',
+  },
 
-
-    lines :{
-
-        fontSize: 30,
-        color: 'black',
-
-    },
-    toolbar :{
-        /*flexDirection : 'row',*/
-        backgroundColor:'white',
-
-    },
-
-
-    date: {
-        textAlign: 'center',
-        color: 'black',
-        fontSize:20,
-
-    },
-    hour:{
-        textAlign: 'left',
-        color:'black',
-        fontSize:20,
-
-    },
-    name: {
-        textAlign: 'left',
-        color: 'black',
-        marginBottom: 10,
-    },
-
-    location: {
-        textAlign : 'left',
-        color:'black',
-        marginBottom:10,
-    },
-
-    description: {
-        textAlign :'left',
-        color : 'black',
-    },
-    scrollView:{
-    height: 0.85*deviceHeight,
-
-    },
-
+  scrollView:{
+     height: 0.85*deviceHeight,
+  },
 });
 module.exports=HomePage;

@@ -22,8 +22,8 @@ height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
-const REQUEST_URL2 = 'http://10.33.171.16:8080/C360/api/helloworld2';
-const REQUEST_URL4 = 'http://10.33.171.16:8080/C360/api/helloworld4';
+const REQUEST_URL2 = 'http://10.33.170.242:8080/C360/api/compte/addCompte';
+const REQUEST_URL4 = 'http://10.33.170.242:8080/C360/api/compte/checkCompte';
 
 
 class CreateAccount extends React.Component{
@@ -43,8 +43,6 @@ class CreateAccount extends React.Component{
       errorType:''
     };
   }
-
-
 
   onPressButtonPOST() {
     if (this.state._email == '' || this.state._password1 == '' || this.state._password2 == ''){
@@ -111,193 +109,155 @@ class CreateAccount extends React.Component{
 
 
   render(_email) {
-
-
     return (
-<View>
-    <View>
-        <View style={styles.topbar}>
-          <Text style={styles.viseocompanion}> VISEO COMPANION </Text>
-        </View>
-    </View>
-
-    <ScrollView
-    contentInset={{top : -50}}
-    style={styles.scrollView}>
-    <View style={styles.container}>
-        <View style={styles.titlecontainer}>
-          <Text style={styles.title}> Créer un compte </Text>
-        </View>
-
-        <View style={styles.emailcontainer}>
-
-
-        <TextInput style={styles.emailInput}
-
-          onChangeText={(_email) => this.setState({_email})}
-          placeholder="Email"
-          keyboardType="email-address"
-          autoCorrect={false}
-          selectTextOnFocus={true}
-          underlineColorAndroid={"white"}
-        />
-        </View>
-        <View style={styles.passwordcontainer}>
-        <TextInput style={styles.passwordInput}
-          ref={component=>this._textInput1=component}
-          onChangeText={(_password1) => this.setState({_password1})}
-          placeholder="Mot de passe(6 caracters minimum)"
-          password={true}
-          autoCorrect={false}
-          selectTextOnFocus={true}
-          underlineColorAndroid={"white"}
-          minLength={5}
-
-        />
-        </View>
-        <View style={styles.passwordcontainer}>
-        <TextInput style={styles.passwordInput}
-          ref={component=>this._textInput2=component}
-          onChangeText={(_password2) => this.setState({_password2})}
-          placeholder="Confirmation mot de passe"
-          password={true}
-          autoCorrect={false}
-          selectTextOnFocus={true}
-          underlineColorAndroid={"white"}
-          minLength={5}
-          />
-        </View>
-        <View style={styles.errorcontainer}>
-          <Text style={styles.errorText}>{this.state.errorType}</Text>
-        </View>
-        <TouchableOpacity onPress={() =>{this.onPressButtonPOST()}}>
-            <View style={styles.okButton}>
-            <Text style={styles.okText}>OK</Text>
+      <View>
+          <View>
+              <View style={styles.topbar}>
+                <Text style={styles.viseocompanion}> VISEO COMPANION </Text>
+              </View>
+          </View>
+          <ScrollView
+            contentInset={{top : -50}}
+            style={styles.scrollView}>
+            <View style={styles.container}>
+                <View style={styles.titlecontainer}>
+                  <Text style={styles.title}> Créer un compte </Text>
+                </View>
+                <View style={styles.emailcontainer}>
+                  <TextInput style={styles.emailInput}
+                    onChangeText={(_email) => this.setState({_email})}
+                    placeholder="Email"
+                    keyboardType="email-address"
+                    autoCorrect={false}
+                    selectTextOnFocus={true}
+                    underlineColorAndroid={"white"}
+                  />
+                </View>
+                <View style={styles.passwordcontainer}>
+                  <TextInput style={styles.passwordInput}
+                    ref={component=>this._textInput1=component}
+                    onChangeText={(_password1) => this.setState({_password1})}
+                    placeholder="Mot de passe(6 caracters minimum)"
+                    password={true}
+                    autoCorrect={false}
+                    selectTextOnFocus={true}
+                    underlineColorAndroid={"white"}
+                    minLength={5}
+                  />
+                </View>
+                <View style={styles.passwordcontainer}>
+                <TextInput style={styles.passwordInput}
+                  ref={component=>this._textInput2=component}
+                  onChangeText={(_password2) => this.setState({_password2})}
+                  placeholder="Confirmation mot de passe"
+                  password={true}
+                  autoCorrect={false}
+                  selectTextOnFocus={true}
+                  underlineColorAndroid={"white"}
+                  minLength={5}
+                  />
+                </View>
+                <View style={styles.errorcontainer}>
+                  <Text style={styles.errorText}>{this.state.errorType}</Text>
+                </View>
+                <TouchableOpacity onPress={() =>{this.onPressButtonPOST()}}>
+                    <View style={styles.okButton}>
+                    <Text style={styles.okText}>OK</Text>
+                    </View>
+                </TouchableOpacity>
             </View>
-        </TouchableOpacity>
-    </View>
-
-</ScrollView>
-
-
-</View>
-          );
-
-}
+          </ScrollView>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
 
-topbar:{
-    backgroundColor: 'grey',
-    height:0.1*deviceHeight,
+    topbar:{
+        backgroundColor: 'grey',
+        height:0.1*deviceHeight,
+    },
 
-},
+    viseocompanion:{
+        justifyContent:'center',
+        textAlign: 'center',
+        fontSize:20,
+        color:'black',
+    },
 
-viseocompanion:
-{
-    justifyContent:'center',
-    textAlign: 'center',
-    fontSize:20,
-    color:'black',
+    container:{
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+        flexDirection:'column',
+        height:0.65*deviceHeight,
+    },
 
-},
+    errorcontainer:{
+        flexDirection:'row',
+        alignItems:'center',
+        justifyContent: 'center',
+        height:0.05*deviceHeight
+    },
 
-container:
-{
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flexDirection:'column',
-    height:0.65*deviceHeight,
+    titlecontainer:{
+        flexDirection:'row',
+        flex:0.6,
+        alignItems:'center',
+    },
 
+    title:{
+        fontSize:15,
+        color:'black',
+        justifyContent:'center',
+    },
 
-},
+    emailcontainer:{
+        flexDirection:'row',
+        flex:2,
+        alignItems:'center',
+    },
 
-errorcontainer:
-{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent: 'center',
-    height:0.05*deviceHeight
-},
+    passwordcontainer:{
+        flexDirection:'row',
+        flex:2,
+        alignItems:'center',
+    },
 
-titlecontainer:
-{
-    flexDirection:'row',
-    flex:0.6,
-    alignItems:'center',
-},
+    emailInput:{
+        alignItems:'center',
+        width: 0.7*deviceWidth,
+        textAlign:'center',
+    },
 
-title:
-{
-  fontSize:15,
-  color:'black',
-  justifyContent:'center',
+    passwordInput:{
+        alignItems:'center',
+        width: 0.7*deviceWidth,
+        textAlign:'center',
+    },
 
-},
+    okButton:{
+        width:0.2*deviceWidth,
+        height:0.1*deviceHeight,
+        borderColor:'black',
+        borderWidth:2,
+        justifyContent:'center',
+        alignItems:'center',
+    },
 
-emailcontainer:
-{
-  flexDirection:'row',
-  flex:2,
-  alignItems:'center',
+    okText:{
+        fontSize:25,
+        color:'black',
+    },
 
-},
+    scrollView:{
+        height : deviceHeight,
+    },
 
-passwordcontainer:
-{
-    flexDirection:'row',
-    flex:2,
-    alignItems:'center',
-
-},
-
-emailInput:{
-    alignItems:'center',
-    width: 0.7*deviceWidth,
-    textAlign:'center',
-},
-
-passwordInput:{
-
-  alignItems:'center',
-  width: 0.7*deviceWidth,
-  textAlign:'center',
-},
-
-okButton:{
-width:0.2*deviceWidth,
-height:0.1*deviceHeight,
-borderColor:'black',
-borderWidth:2,
-justifyContent:'center',
-alignItems:'center',
-
-},
-
-okText:{
-  fontSize:25,
-  color:'black',
-
-
-},
-
-scrollView:{
-  height : deviceHeight,
-
-},
-errorText : {
-color : 'red',
-
-}
-
-
-
-
-
+    errorText : {
+        color : 'red',
+    }
 });
-
-
 
 module.exports=CreateAccount;

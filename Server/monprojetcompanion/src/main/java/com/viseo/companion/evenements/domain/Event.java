@@ -111,8 +111,6 @@ public class Event implements java.io.Serializable
 	public void setCompteEvents(Set<CompteEvent> events){
 		this.compteEvents = events;
 	}
-	
-	private static final long serialVersionUID = 1L;
 }
 	
 	

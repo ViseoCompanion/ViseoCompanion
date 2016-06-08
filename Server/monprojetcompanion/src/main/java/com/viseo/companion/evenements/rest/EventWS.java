@@ -42,23 +42,13 @@ public class EventWS {
 	@Inject
 	EventDAO eventDAO;
 
-	
-	@RequestMapping(value = "${endpoint.helloworld6}", method = RequestMethod.POST)
+	@RequestMapping(value = "${endpoint.addEvent}", method = RequestMethod.POST)
     @ResponseBody
     public void addEvent(@Valid @RequestBody Event myEvent, BindingResult bindingResult){
 			eventDAO.addEvent(myEvent);
     }
-//    public boolean addEvent(@Valid @RequestBody Event myEvent, BindingResult bindingResult){
-//
-//		if(!(bindingResult.hasErrors()) && !eventDAO.isEventAlreadySaved(myEvent.getEvent())){
-//			eventDAO.addEvent(myEvent);
-//			return true;
-//		}
-//		return false;
-//    }
 	
-	
-	@RequestMapping(value = "${endpoint.helloworld}", method = RequestMethod.GET)
+	@RequestMapping(value = "${endpoint.readEvent}", method = RequestMethod.GET)
 	@ResponseBody
     public List<Event> ReadEvent(){	
 		return eventDAO.GetAllEvent();
