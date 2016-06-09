@@ -1,0 +1,38 @@
+.form-horizontal {
+   width:500px;
+}
+
+MainContainer : {
+align-items: flex-start;
+
+}
+
+lieuContainer {
+
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.dateTime {
+
+  width : 500px;
+
+}
+
+dateContainer {
+flex-direction: row;;
+
+}
+
+.datetime-picker-dropdown {
+
+}
+
+.datetime-picker-dropdown > li.date-picker-menu div > table .btn-default {
+  border: 0;
+}
+
+.datetime-picker-dropdown > li.time-picker-menu div > table {
+
+}
