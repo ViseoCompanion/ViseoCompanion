@@ -40,15 +40,15 @@ console.log(JSON.stringify(Event));
 var string0 = Event.event;
 var string1 = Event.lieu;
 var string2 = Event.description;
-var string3 = Event.moclefs;
+var string3 = Event.motclefs;
 
 var monRegEx = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,255}$/;
 if(string0==="" || Event.date==="" || string1==="" || string2==="" || string3===""){
       console.log("* veuillez remplir tous les champs!!!");
 
       var errorMessage = document.getElementById("errorMessage").inner;
-      errorMessageAll = "* veuillez remplir tous les champs!!!";
-      errorMessage=errorMessage0.fontcolor("red");
+      errorMessage1 = "* veuillez remplir tous les champs!!!";
+      errorMessage=errorMessage1.fontcolor("red");
       document.getElementById("errorMessage").innerHTML = errorMessage;
       document.getElementById("errorMessage-titre").innerHTML ="";
       document.getElementById("errorMessage-lieu").innerHTML ="";
