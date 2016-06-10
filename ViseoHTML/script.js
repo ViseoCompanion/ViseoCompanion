@@ -37,29 +37,64 @@ console.log(Event);
 
 
 console.log(JSON.stringify(Event));
+var string0 = Event.event;
+var string1 = Event.lieu;
+var string2 = Event.description;
+var string3 = Event.moclefs;
 
-
-var string = Event.event;
-var monRegEx = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{5,60}$/;
-if(Event.event==="" || Event.date==="" || Event.lieu==="" || Event.description==="" || Event.motclefs===""){
-      console.log("veuillez remplir tous les champs!!!");
+var monRegEx = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,255}$/;
+if(string0==="" || Event.date==="" || string1==="" || string2==="" || string3===""){
+      console.log("* veuillez remplir tous les champs!!!");
 
       var errorMessage = document.getElementById("errorMessage").inner;
-      errorMessage0 = "veuillez remplir tous les champs!!!";
+      errorMessageAll = "* veuillez remplir tous les champs!!!";
       errorMessage=errorMessage0.fontcolor("red");
       document.getElementById("errorMessage").innerHTML = errorMessage;
+      document.getElementById("errorMessage-titre").innerHTML ="";
+      document.getElementById("errorMessage-lieu").innerHTML ="";
+      document.getElementById("errorMessage-description").innerHTML ="";
+      document.getElementById("errorMessage-motclefs").innerHTML ="";
 }
-else if(Event.event.length<2){
-  var errorMessage = document.getElementById("errorMessage").inner;
-  errorMessage0 =  "*Tire : Il faut au moins 2 caractère.";
-  errorMessage=errorMessage0.fontcolor("red");
-  document.getElementById("errorMessage").innerHTML = errorMessage;
+else if(!string0.match(monRegEx)){
+      var errorMessage_titre = document.getElementById("errorMessage-titre").inner;
+      errorMessage0 =  "* 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #";
+      errorMessage_titre=errorMessage0.fontcolor("red");
+      document.getElementById("errorMessage-titre").innerHTML = errorMessage_titre;
+      document.getElementById("errorMessage").innerHTML = "";
+      document.getElementById("errorMessage-lieu").innerHTML ="";
+      document.getElementById("errorMessage-description").innerHTML ="";
+      document.getElementById("errorMessage-motclefs").innerHTML ="";
 }
-else if(!string.match(monRegEx)){
-      var errorMessage = document.getElementById("errorMessage").inner;
-      errorMessage0 =  "Les caractères spéciaux autorisés sont les accents, tiret, apostrophe, point d'interrogation, point d'exclamation, guillemets, point, slash, virgule, +, *, #, espace (trimé) et le champ doit avoir 2 caractères minimum";
-      errorMessage=errorMessage0.fontcolor("red");
-      document.getElementById("errorMessage").innerHTML = errorMessage;
+
+else if(!string1.match(monRegEx)){
+      var errorMessage_lieu = document.getElementById("errorMessage-lieu").inner;
+      errorMessage0 =  "* 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #";
+      errorMessage_lieu=errorMessage0.fontcolor("red");
+      document.getElementById("errorMessage-lieu").innerHTML = errorMessage_lieu;
+      document.getElementById("errorMessage").innerHTML ="";
+      document.getElementById("errorMessage-titre").innerHTML ="";
+      document.getElementById("errorMessage-description").innerHTML ="";
+      document.getElementById("errorMessage-motclefs").innerHTML ="";
+}
+else if(!string2.match(monRegEx)){
+      var errorMessage_description = document.getElementById("errorMessage-description").inner;
+      errorMessage0 =  "* 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #";
+      errorMessage_description=errorMessage0.fontcolor("red");
+      document.getElementById("errorMessage-description").innerHTML = errorMessage_description;
+      document.getElementById("errorMessage").innerHTML = "";
+      document.getElementById("errorMessage-titre").innerHTML ="";
+      document.getElementById("errorMessage-lieu").innerHTML ="";
+      document.getElementById("errorMessage-motclefs").innerHTML ="";
+}
+else if(!string3.match(monRegEx)){
+      var errorMessage_motclefs = document.getElementById("errorMessage-motclefs").inner;
+      errorMessage0 =  "* 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #";
+      errorMessage_motclefs=errorMessage0.fontcolor("red");
+      document.getElementById("errorMessage-motclefs").innerHTML = errorMessage_motclefs;
+      document.getElementById("errorMessage").innerHTML = "";
+      document.getElementById("errorMessage-titre").innerHTML ="";
+      document.getElementById("errorMessage-lieu").innerHTML ="";
+      document.getElementById("errorMessage-description").innerHTML ="";
 }
 
 else{

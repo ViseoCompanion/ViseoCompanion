@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="C:\Users\DHU3504\Documents\GitHub\ViseoCompanion\ViseoHTML\awesome-font\font-awesome-4.6.3\css\font-awesome.min.css" />
-    <link rel="stylesheet" href="C:\Users\DHU3504\Documents\GitHub\ViseoCompanion\ViseoHTML\bootstrap\bootstrap-3.3.6-dist\css\bootstrap.min.css" />
+    <link rel="stylesheet" href="awesome-font\font-awesome-4.6.3\css\font-awesome.min.css" />
+    <link rel="stylesheet" href="bootstrap\bootstrap-3.3.6-dist\css\bootstrap.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"> </script>
@@ -27,9 +27,12 @@
               <p class="input-group">
                 <input type="text" class="form-control" size="50" name='event' id="event"  />
               </p>
+              <div id="errorMessage-titre">
+              </div>
             </div>
 
       </div>
+
    </form>
 
 
@@ -52,7 +55,10 @@
                   <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event, 'picker2')"><i class="fa fa-clock-o"></i></button>
               </span>
               </p>
+              <div id="errorMessage-date">
+              </div>
             </div>
+
      </div>
    </form>
 
@@ -64,10 +70,12 @@
               <p class="input-group">
 						      <input type='text' class="form-control" size="50"  name="lieu" id="lieu"  />
               </p>
-
+              <div id="errorMessage-lieu">
+              </div>
             </div>
 
         </div>
+
         <div class="lieuContainer">
           <!-- <img src="map-icon.png" width="30"/> -->
         </div>
@@ -81,6 +89,8 @@
               <p class="input-group">
                   <textarea name='description' class="form-control"  rows="10" cols="52"  id='description' ></textarea>
               </p>
+              <div id="errorMessage-description">
+              </div>
             </div>
 
         </div>
@@ -95,6 +105,8 @@
               <p class="input-group">
 						      <input placeholder="Mot-clef 1, Mot-clef 2, Mot-clef 3" type='text' class="form-control " size="50" name='motclefs' id="motclefs"  />
               </p>
+              <div id="errorMessage-motclefs">
+              </div>
             </div>
 
         </div>
@@ -104,7 +116,6 @@
         <input type='submit' value='Ajouter' onclick="submitform()" />
     </p>
     <div id="errorMessage">
-
     </div>
 
 
