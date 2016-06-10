@@ -59,7 +59,6 @@ else{
        contentType:"application/json",
        authorization: 'basic',
        complete: function() {console.log('envoyé!');}
-
     });
 
 }
