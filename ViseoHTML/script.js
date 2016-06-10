@@ -39,12 +39,25 @@ console.log(Event);
 console.log(JSON.stringify(Event));
 
 
-
+var string = Event.event;
+var monRegEx = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{5,60}$/;
 if(Event.event==="" || Event.date==="" || Event.lieu==="" || Event.description==="" || Event.motclefs===""){
       console.log("veuillez remplir tous les champs!!!");
 
       var errorMessage = document.getElementById("errorMessage").inner;
       errorMessage0 = "veuillez remplir tous les champs!!!";
+      errorMessage=errorMessage0.fontcolor("red");
+      document.getElementById("errorMessage").innerHTML = errorMessage;
+}
+else if(Event.event.length<2){
+  var errorMessage = document.getElementById("errorMessage").inner;
+  errorMessage0 =  "*Tire : Il faut au moins 2 caractère.";
+  errorMessage=errorMessage0.fontcolor("red");
+  document.getElementById("errorMessage").innerHTML = errorMessage;
+}
+else if(!string.match(monRegEx)){
+      var errorMessage = document.getElementById("errorMessage").inner;
+      errorMessage0 =  "Les caractères spéciaux autorisés sont les accents, tiret, apostrophe, point d'interrogation, point d'exclamation, guillemets, point, slash, virgule, +, *, #, espace (trimé) et le champ doit avoir 2 caractères minimum";
       errorMessage=errorMessage0.fontcolor("red");
       document.getElementById("errorMessage").innerHTML = errorMessage;
 }
