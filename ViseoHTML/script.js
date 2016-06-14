@@ -42,7 +42,7 @@ var string1 = Event.lieu;
 var string2 = Event.description;
 var string3 = Event.motclefs;
 
-var monRegEx = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ._-\s]{2,255}$/;
+var monRegEx = /^[a-zA-Z0-9áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ.,!?#_-\s]{2,255}$/;
 if(string0==="" || Event.date==="" || string1==="" || string2==="" || string3===""){
       console.log("* veuillez remplir tous les champs!!!");
 
@@ -130,6 +130,7 @@ app.controller('MyController', ['$scope', function($scope) {
       date: new Date(),
       datepickerOptions: {
         showWeeks: false,
+        minDate: new Date(),
         startingDay: 1,
         dateDisabled: function(data) {
           return (data.mode === 'day' && (new Date().toDateString() == data.date.toDateString()));
