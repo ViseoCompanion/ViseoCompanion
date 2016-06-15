@@ -12,16 +12,21 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Version;
+
 import com.viseo.companion.comptes.domain.Compte;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.viseo.companion.compteEvents.domain.CompteEvent;
 
 
 @Entity
-@Table(name = "event")
 public class Event implements java.io.Serializable
 {
-	private int idEvent;
+	@Id
+	@GeneratedValue
+	private long idEvent;
+	@Version
+	private long version;
 	private String event;
 	private Date date;
 	private String description;
@@ -45,7 +50,7 @@ public class Event implements java.io.Serializable
 	@Id
 	@GeneratedValue
 	@Column(name="EVENT_ID")
-	public int getId() {
+	public long getId() {
 		return idEvent;
 	}
 	
@@ -74,7 +79,7 @@ public class Event implements java.io.Serializable
 		return this.lieu;
 	}
 	
-	public void setId(int id){
+	public void setId(long id){
 		this.idEvent=id;
 		
 	}

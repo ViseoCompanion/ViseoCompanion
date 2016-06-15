@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -23,19 +24,19 @@ public class EventDAO {
 	EntityManager em;
 
 	@Transactional
-	public Event getEvent(int id){
+	public Event getEvent(long id){
 		return em.find(Event.class, id);
 	}
 
 	@Transactional
-	public void addEvent(String eventname,Date date,String description,String motclefs,String lieu){		
+	public void addEvent(String eventName,Date date,String description,String motclefs,String lieu){		
 		Event event = new Event();		
 		event.setDate(date);
 		event.setDescription(description);
-		event.setEvent(eventname);
+		event.setEvent(eventName);
 		event.setLieu(lieu);
 		event.setMotclefs(motclefs);
-		em.persist(event);		
+		addEvent(event);		
 	}
 
 	@Transactional
@@ -43,17 +44,17 @@ public class EventDAO {
 		em.persist(event);
 	}
 
-	public boolean isEventAlreadySaved(String event){
-		Collection<Event> list = null;
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Event> q = cb.createQuery(Event.class);
-		Root<Event> c = q.from(Event.class);
-		q.select(c).where(cb.equal(c.get("event"), event));
-		list = (Collection<Event>) em.createQuery(q).getResultList();
-		return !list.isEmpty(); //return true if the list is not avoid
+	@Transactional
+	public boolean isEventAlreadySaved(String eventName){	
+		Query query=em.createQuery("select e from Event e where e.event=:eventName");
+		query.setParameter("eventName",eventName);		
+		@SuppressWarnings("unchecked")
+		Collection<Event> list = (Collection<Event>) query.getResultList();
+		return !list.isEmpty();
 	}
-
-	public List<Event> GetAllEvent() {		
+	
+	@Transactional
+	public List<Event> getAllEvent() {		
 		return em.createQuery("select a from Event a order by a.date", Event.class).getResultList();
 	}
 }

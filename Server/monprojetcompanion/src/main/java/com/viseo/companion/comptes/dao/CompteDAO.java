@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -28,20 +29,20 @@ public class CompteDAO {
 	EntityManager em;
 	
 	@Transactional
-	public Compte getCompte(int id){
+	public Compte getCompte(long id){
 		return em.find(Compte.class, id);
 	}
 
 	@Transactional
-	public void addCompte(int id, String email, String password, String username){	
+	public void addCompte(String email, String password, String username){	
 		Compte compte = new Compte();
 		compte.setEmail(email);
 		compte.setPassword(password);
-		em.persist(compte);
+		addCompte(compte);
 	}
 	
 	@Transactional
-	public Event getEvent(int id){
+	public Event getEvent(long id){
 		return em.find(Event.class, id);
 	}
 
@@ -51,77 +52,54 @@ public class CompteDAO {
 	}
 
 	@Transactional
-	public boolean isCompteAlreadySaved(String myCompte){
-		Collection<Compte> list = null;
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Compte> q = cb.createQuery(Compte.class);
-		Root<Compte> c = q.from(Compte.class);
-		q.select(c).where(cb.equal(c.get("email"), myCompte));
-		list = (Collection<Compte>) em.createQuery(q).getResultList();
-		return !list.isEmpty(); //return true if the list is not avoid
-	}
-	
-	@Transactional
-	public boolean isAuthenticater(String Email, String Password){	
-		Collection<Compte> list = null;
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Compte> cq = builder.createQuery(Compte.class);
-		Root r = cq.from(Compte.class);
-		cq.select(r);
-		//where
-		Predicate usereq = builder.equal(r.get("email"),Email);
-		Predicate pwdeq = builder.equal(r.get("password"), Password);
-		Predicate predicate = builder.and(usereq,pwdeq);
-		//compare if the email and the password matches each other
-		cq.where(predicate);
-		//execution
-		list=(Collection<Compte>) em.createQuery(cq).getResultList();
+	public boolean isCompteAlreadySaved(String email){
+		Query query=em.createQuery("select c from Compte c where c.email=:email");
+		query.setParameter("email",email);		
+		@SuppressWarnings("unchecked")
+		Collection<Compte> list = (Collection<Compte>) query.getResultList();
 		return !list.isEmpty();
-		//if list is empty than the compte doesn't exist
 	}
 	
 	@Transactional
-	public List<Compte> GetAllCompte() {	
+	public boolean isAuthenticater(String email, String password){	
+		Query query=em.createQuery("select c from Compte c where c.email=:email and c.password=:password");
+		query.setParameter("email",email);	
+		query.setParameter("password",password);
+		@SuppressWarnings("unchecked")
+		Collection<Compte> list = (Collection<Compte>) query.getResultList();
+		return !list.isEmpty();	
+	}
+	
+	@Transactional
+	public List<Compte> getAllCompte() {	
 		return em.createQuery("select a from Compte a", Compte.class).getResultList();
 	}
 
 	@Transactional
-	public Object GetCompteByEmail(String emailDemande) {	
+	public Object getCompteByEmail(String emailDemande) {	
 		return em.createQuery("SELECT id FROM Compte WHERE email LIKE :emailCompte")
 				.setParameter("emailCompte", emailDemande)
 				.getResultList().get(0);
-	}//get the generated id of the compte by email
+	}
+	//get the generated id of the compte by email
 
 	@Transactional
-	public void addEventToCompte(int idCompte,int idEvent){
+	public void setParticipation(long idCompte,long idEvent, boolean participation){
+		
 		CompteEvent compteEvent = new CompteEvent();	
-		Compte compte=new Compte();
-		compte.setId(idCompte);
+		Compte compte=em.find(Compte.class, idCompte);
 		compteEvent.setCompte(compte);	//set compte in the join table
-		Event event=new Event();
-		event.setId(idEvent);
-		compteEvent.setEvent(event);	//set event	in the join table
-		compteEvent.setParticipated(true);	//set participate the event
+		Event event=em.find(Event.class, idEvent);
+		compteEvent.setEvent(event);
+		System.out.print(participation);//set event	in the join table
+		compteEvent.setParticipated(participation);	//set participate the event
 		compte.addCompteEvent(compteEvent); 
 		em.merge(compteEvent);
 	}
 	
-	@Transactional
-	public void cancelEventFromCompte(int idCompte,int idEvent){
-		CompteEvent compteEvent = new CompteEvent();	
-		Compte compte=new Compte();
-		compte.setId(idCompte);
-		compteEvent.setCompte(compte);
-		Event event=new Event();
-		event.setId(idEvent);
-		compteEvent.setEvent(event);
-		compteEvent.setParticipated(false); //set doesn't participate the event
-		compte.addCompteEvent(compteEvent);
-		em.merge(compteEvent);
-	}
 	
 	@Transactional
-	public boolean getParticipation(int idCompte,int idEvent){
+	public boolean getParticipation(long idCompte,long idEvent){
 		java.util.Set<CompteEvent> result = new HashSet<CompteEvent>();//creat a new Set
 		Compte compte=new Compte();		
 		Event event=new Event();
@@ -140,7 +118,7 @@ public class CompteDAO {
 	}
 	
 	@Transactional
-	public boolean isSetParticipation(int idCompte,int idEvent){
+	public boolean isSetParticipation(long idCompte,long idEvent){
 		java.util.Set<CompteEvent> result = new HashSet<CompteEvent>();
 		Compte compte=new Compte();		
 		Event event=new Event();

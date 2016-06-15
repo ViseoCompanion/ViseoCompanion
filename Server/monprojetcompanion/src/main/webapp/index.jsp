@@ -1,5 +1,5 @@
 <html>
 <body>
-<h2>This is VISEO COMPANION!</h2>
+<h2>Hello World!</h2>
 </body>
 </html>

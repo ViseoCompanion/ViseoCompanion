@@ -1,0 +1,37 @@
+<html>
+<head>
+<link rel="stylesheet" href="bootstrap.css"/>
+<meta charset="ISO-8859-1">
+<title> AJOUTER UN EVENEMENT </title>
+</head>
+<body>
+
+
+<form >
+	<p>
+		<label for="nom">Titre :</label>
+		<input type="text" name="event" id="event" />
+	</p>
+
+	<p>
+		<label for="date">Date :</label>
+		<input type="text" name="date" id="date" />
+	</p>
+
+	<p>
+		<label for="lieu">Email :</label>
+		<input type="text" name="lieu" id="lieu" />
+	</p>
+
+	<p>
+		<label for="description">Description :</label><br />
+		<textarea name="description" cols="45" rows="10"></textarea>
+	</p>
+
+	<p>
+		<input type="submit" value="Envoyer" />
+	</p>
+</form>
+
+</body>
+</html>

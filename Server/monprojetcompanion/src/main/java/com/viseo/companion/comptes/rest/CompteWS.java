@@ -35,7 +35,7 @@ public class CompteWS {
 	@RequestMapping(value = "${endpoint.addCompte}", method = RequestMethod.GET)
 	@ResponseBody
     public List<Compte> ReadCompte(){	
-		return compteDAO.GetAllCompte();
+		return compteDAO.getAllCompte();
 	}
 	
 	@RequestMapping(value = "${endpoint.Authentification}", method = RequestMethod.POST)
@@ -61,32 +61,25 @@ public class CompteWS {
 	@RequestMapping(value = "${endpoint.getIdCompte}", method = RequestMethod.GET)
     @ResponseBody
     public Object findCompteByEmail(@PathVariable String email){
-		return compteDAO.GetCompteByEmail(email);
+		return compteDAO.getCompteByEmail(email);
     }
 	
 	@RequestMapping(value = "${endpoint.participateEvent}", method = RequestMethod.GET)
     @ResponseBody
-    public boolean addToEventCompte(@PathVariable("idCompte") int idCompte,@PathVariable("idEvent") int idEvent){
-			compteDAO.addEventToCompte(idCompte,idEvent);
+    public boolean participationToEvent(@PathVariable("idCompte") long idCompte,@PathVariable("idEvent") long idEvent, @PathVariable("participation") boolean participation){
+			compteDAO.setParticipation(idCompte,idEvent,participation);
 			return true;
     }
 
-	@RequestMapping(value = "${endpoint.cancelEvent}", method = RequestMethod.GET)
-    @ResponseBody
-    public boolean cancelFromEventCompte(@PathVariable("idCompte") int idCompte,@PathVariable("idEvent") int idEvent){
-			compteDAO.cancelEventFromCompte(idCompte,idEvent);
-			return true;
-    }
-	
 	@RequestMapping(value = "${endpoint.getParticipation}", method = RequestMethod.GET)
     @ResponseBody
-    public boolean getParticipationCompteEvent(@PathVariable("idCompte") int idCompte,@PathVariable("idEvent") int idEvent){
+    public boolean getParticipationCompteEvent(@PathVariable("idCompte") long idCompte,@PathVariable("idEvent") long idEvent){
 		return compteDAO.getParticipation(idCompte,idEvent);
 	}
 	
 	@RequestMapping(value = "${endpoint.doneParticipation}", method = RequestMethod.GET)
     @ResponseBody
-    public boolean isAllreadySetParticipation(@PathVariable("idCompte") int idCompte,@PathVariable("idEvent") int idEvent){
+    public boolean isAllreadySetParticipation(@PathVariable("idCompte") long idCompte,@PathVariable("idEvent") long idEvent){
 		return compteDAO.isSetParticipation(idCompte,idEvent);
 	}
 }
