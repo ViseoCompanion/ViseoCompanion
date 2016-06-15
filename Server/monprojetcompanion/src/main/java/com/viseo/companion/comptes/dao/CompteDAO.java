@@ -5,12 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.hibernate.mapping.Set;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,6 +28,8 @@ public class CompteDAO {
 
 	@PersistenceContext
 	EntityManager em;
+	
+	BCryptPasswordEncoder passwordEncoder;
 	
 	@Transactional
 	public Compte getCompte(int id){
@@ -47,6 +51,8 @@ public class CompteDAO {
 
 	@Transactional
 	public void addCompte(Compte compte){
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		compte.setPassword(passwordEncoder.encode(compte.getPassword()));
 		em.persist(compte);
 	}
 
@@ -62,22 +68,13 @@ public class CompteDAO {
 	}
 	
 	@Transactional
-	public boolean isAuthenticater(String Email, String Password){	
-		Collection<Compte> list = null;
-		CriteriaBuilder builder = em.getCriteriaBuilder();
-		CriteriaQuery<Compte> cq = builder.createQuery(Compte.class);
-		Root r = cq.from(Compte.class);
-		cq.select(r);
-		//where
-		Predicate usereq = builder.equal(r.get("email"),Email);
-		Predicate pwdeq = builder.equal(r.get("password"), Password);
-		Predicate predicate = builder.and(usereq,pwdeq);
-		//compare if the email and the password matches each other
-		cq.where(predicate);
-		//execution
-		list=(Collection<Compte>) em.createQuery(cq).getResultList();
-		return !list.isEmpty();
-		//if list is empty than the compte doesn't exist
+	public boolean isAuthenticater(String email, String password){	
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		Query query=em.createQuery("select c from Compte c where c.email=:email");
+		query.setParameter("email",email);	
+		@SuppressWarnings("unchecked")
+		Collection<Compte> list = (Collection<Compte>) query.getResultList();
+		return encoder.matches(password, list.iterator().next().getPassword());
 	}
 	
 	@Transactional
