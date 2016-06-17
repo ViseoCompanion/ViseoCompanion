@@ -9,9 +9,9 @@
         <property name="hibernate.connection.url">jdbc:postgresql:@localhost:5432</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
-        <mapping class="com.viseo.companion.comptes.domain.Compte"/>
-        <mapping class="com.viseo.companion.evenements.domain.Event"/>
-        <mapping class="com.viseo.companion.compteEvents.domain.CompteEvent"/>
-        <mapping class="com.viseo.companion.compteEvents.domain.CompteEventID"/>
+        <mapping class="com.viseo.companion.accounts.domain.Account"/>
+        <mapping class="com.viseo.companion.events.domain.Event"/>
+        <mapping class="com.viseo.companion.accountEvents.domain.AccountEvent"/>
+        <mapping class="com.viseo.companion.accountEvents.domain.AccountEventID"/>
     </session-factory>
 </hibernate-configuration>

@@ -10,10 +10,10 @@
             Persistence unit for the the project VISEO COMPANION
         </description>
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<class>com.viseo.companion.evenements.domain.Event</class>
-		<class>com.viseo.companion.comptes.domain.Compte</class>
-		<class>com.viseo.companion.compteEvents.domain.CompteEvent</class>
-		<class>com.viseo.companion.compteEvents.domain.CompteEventID</class>
+		<class>com.viseo.companion.events.domain.Event</class>
+		<class>com.viseo.companion.accounts.domain.Account</class>
+		<class>com.viseo.companion.accountEvents.domain.AccountEvent</class>
+		<class>com.viseo.companion.accountEvents.domain.AccountEventID</class>
 		<properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
             <property name="hibernate.show_sql" value="true" />
