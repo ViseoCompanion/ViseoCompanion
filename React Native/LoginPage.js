@@ -23,7 +23,7 @@ height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
-const REQUEST_URL3 = 'http://10.33.170.242:8080/C360/api/compte/Authentification';
+const REQUEST_URL3 = 'http://10.33.171.74:8080/C360/api/account/Authentification';
 
 class LoginPage extends React.Component{
 

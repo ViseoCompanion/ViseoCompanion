@@ -1,15 +1,58 @@
 .form-horizontal {
-   width:600px;
+   width:700px;
+}
+.container-bar {
+   height:100px;
+}
+.form-horizontal-blank {
+   height: 50px;
+}
+.form-horizontal-blank-small {
+   height: 20px;
+}
+.form-horizontal-blank-medium {
+   height: 25px;
+}
+.form-horizontal-titre {
+   height: 100px;
+}
+.form-horizontal-email {
+   height: 70px;
+}
+.form-horizontal-password {
+   height: 50px;
+}
+.form-horizontal-forgot {
+   height: 70px;
 }
 .form-space {
-   width:50px;
+   width:100px;
+}
+#banner  {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
+#element1 {
+  margin-right: 10px;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+rightBanner :{
+
+  align-items: flex-end;
+}
 MainContainer : {
-align-items: flex-start;
-
+align-items: flex-end;
+width :700px;
 }
-
+.RowContrainer:{
+    margin-bottom:($spacer-x * 1.5) !important;
+}
 lieuContainer {
 
   flex-direction: column;

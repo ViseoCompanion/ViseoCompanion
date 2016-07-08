@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html ng-app="app" ng-controller="MyController as ctrl">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="awesome-font\font-awesome-4.6.3\css\font-awesome.min.css" />
+    <link rel="stylesheet" href="bootstrap\bootstrap-3.3.6-dist\css\bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.0/ui-bootstrap-tpls.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"> </script>
+    <script src="datetime-picker.js"></script>
+    <script src="angular-locale_fr-fr.js"></script>
+    <script src="script.js"></script>
+</head>
+<body style="padding:10px;" class="container-fluid">
+
+<div id="banner" >
+  <div class=element>
+    <p style="font-size:30px; ">VISEO COMPANION</p>
+  </div>
+  <div class=element>
+    <div id=element1>
+      <p style="font-size:30px; margin-right:10px; ">Evénements</p>
+
+      <p style="font-size:30px; margin-right:10px;">Questions</p>
+
+      <p style="font-size:30px; margin-right:10px;">Notifications</p>
+    </div>
+
+  </div>
+</div>
+
+
+<hr />
+
+<div align="center">
+  <p style="font-size:40px; margin-bottom:60px;">AJOUTER EVENEMENT</p>
+
+
+
+
+<div class="MainContainer">
+
+  <form class="form-horizontal">
+      <div class="form-group">
+            <label class="col-sm-2 control-label" for="event">Titre :</label>
+            <div class="col-sm-8">
+              <p class="input-group">
+                <input type="text" class="form-control" size="60" name='event' id="event"  />
+              </p>
+              <div id="errorMessage-titre">
+              </div>
+            </div>
+      </div>
+
+   </form>
+   <form class="form-horizontal">
+     <div class="form-group">
+          <label class="col-sm-2 control-label">Date :</label>
+          <div class="col-sm-5">
+            <p class="input-group">
+            <input type="text" id="date"
+            class="form-control"
+            datepicker-popup="dd-MMMM-yyyy"
+            datetime-picker="mediumDate"
+            ng-model="ctrl.picker1.date"
+            is-open="ctrl.picker1.open"
+            enable-time="false"
+            datepicker-options="ctrl.picker1.datepickerOptions"
+            min-Date="minDate"
+            date-disabled="disabled(date, mode)"
+            close-on-date-selection="false"
+            datepicker-append-to-body="true"
+            readonly
+             />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event, 'picker1')"><i class="fa fa-calendar"></i></button>
+              </span>
+            </p>
+            </div>
+            <div class="col-sm-3">
+              <p class="input-group">
+              <input type="text" id="time"
+                    stepping="30"
+                    class="form-control"
+                    datetime-picker="HH:mm"
+                    ng-model="ctrl.picker2.date"
+                    is-open="ctrl.picker2.open"
+                    enable-date="false"
+                    timepicker-options="ctrl.picker2.timepickerOptions"
+                    close-on-selection="true"
+                    readonly/>
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="ctrl.openCalendar($event, 'picker2')"><i class="fa fa-clock-o"></i></button>
+              </span>
+              </p>
+            </div>
+     </div>
+   </form>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+
+						<label class="col-sm-2 control-label" >Lieu :</label>
+            <div class="col-sm-8">
+              <p class="input-group">
+						      <input type='text' class="form-control" size="60"  name="lieu" id="lieu"  />
+              </p>
+              <div id="errorMessage-lieu">
+              </div>
+            </div>
+
+        </div>
+        <div class="lieuContainer">
+          <!-- <img src="map-icon.png" width="30"/> -->
+        </div>
+
+    </form>
+
+    <form class="form-horizontal">
+        <div class="form-group">
+
+						<label class="col-sm-2 control-label" >Description :</label>
+            <div class="col-sm-8">
+              <p class="input-group">
+                  <textarea name='description' class="form-control"  rows="10" cols="60"  id='description' ></textarea>
+              </p>
+              <div id="errorMessage-description">
+              </div>
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <form class="form-horizontal">
+        <div class="form-group">
+
+						<label class="col-sm-2 control-label" >Mots-clefs :</label>
+            <div class="col-sm-8">
+              <p class="input-group">
+						      <input placeholder="Mot clef 1, Mot clef 2, Mot clef 3" type='text' class="form-control " size="60" name='motclefs' id="motclefs"  />
+              </p>
+              <div id="errorMessage-motclefs">
+              </div>
+            </div>
+
+        </div>
+
+    </form>
+
+    <p>
+        <input type='submit' value='Ajouter' onclick="submitform()" />
+    </p>
+    <div id="errorMessage">
+    </div>
+
+
+  </div>
+</div>
+
+
+</body>
+
+</html>

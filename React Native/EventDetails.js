@@ -17,38 +17,36 @@ Dimensions,
 } from 'react-native';
 
 
-var HomePage=require('./HomePage');
+let HomePage=require('./HomePage');
 
-var{
+let{
 height: deviceHeight,
 width: deviceWidth
 } = Dimensions.get('window');
 
 
-var REQUEST_URL7P1 = 'http://10.33.170.242:8080/C360/api/compte/getIdCompte/';
-var REQUEST_URL7P2 = '/events'
-var REQUEST_URL7 = ''
+let REQUEST_URL7P1 = 'http://10.33.171.74:8080/C360/api/account/getIdAccount/';
+let REQUEST_URL7P2 = '/events'
+let REQUEST_URL7 = ''
 
-var REQUEST_URL5P1 = 'http://10.33.170.242:8080/C360/api/compte/participateEvent/';
-var REQUEST_URL5P2 = '/events/'
-var REQUEST_URL5 = ''
+let REQUEST_URL5P1 = 'http://10.33.171.74:8080/C360/api/account/participationEvent/';
+let REQUEST_URL5P2 = '/events/'
+let REQUEST_URL5 = ''
 
-var REQUEST_URL9P1 = 'http://10.33.170.242:8080/C360/api/compte/cancelEvent/';
-var REQUEST_URL9P2 = '/events/'
-var REQUEST_URL9 = ''
+let REQUEST_URL10P1 = 'http://10.33.171.74:8080/C360/api/account/getParticipation/';
+let REQUEST_URL10P2 = '/events/'
+let REQUEST_URL10 = ''
 
-var REQUEST_URL10P1 = 'http://10.33.170.242:8080/C360/api/compte/getParticipation/';
-var REQUEST_URL10P2 = '/events/'
-var REQUEST_URL10 = ''
+let REQUEST_URL11P1 = 'http://10.33.171.74:8080/C360/api/account/doneParticipation/';
+let REQUEST_URL11P2 = '/events/'
+let REQUEST_URL11 = ''
 
-var REQUEST_URL11P1 = 'http://10.33.170.242:8080/C360/api/compte/doneParticipation/';
-var REQUEST_URL11P2 = '/events/'
-var REQUEST_URL11 = ''
+let participation = '';
 
-const okButton= require('./okButton.png');
-const okButton2= require('./okButton2.png');
-const crossButton= require('./crossButton.png');
-const crossButton2= require('./crossButton2.png');
+var okButton= require('./okButton.png');
+var okButton2= require('./okButton2.png');
+var crossButton= require('./crossButton.png');
+var crossButton2= require('./crossButton2.png');
 
 function addZero(i) {
   if (i < 10) {
@@ -62,6 +60,7 @@ class EventDetails extends React.Component{
 
   constructor(props) {
     super(props);
+    this._acceptEvent = this._acceptEvent.bind(this);
     this._showParticipation=this._showParticipation.bind(this);
     this.state = {
       statut:'',
@@ -75,24 +74,29 @@ class EventDetails extends React.Component{
   }
 
   _showParticipation(){
-    console.log("showParticipation");
-    var REQUEST_URL7main=this.props.email;
+    let REQUEST_URL7main=this.props.email;
     REQUEST_URL7=REQUEST_URL7P1+REQUEST_URL7main+REQUEST_URL7P2;
+    console.log(REQUEST_URL7);
     fetch(REQUEST_URL7)
       .then((response) => response.json())
       .then((responseData1) => {
+        console.log(responseData1);
         REQUEST_URL11=REQUEST_URL11P1+responseData1+REQUEST_URL11P2+this.props.event.id;
+        console.log(REQUEST_URL11);
         fetch(REQUEST_URL11)
         .then((response) => response.json())
         .then((responseData2) => {
-          if(responseData2===true){
+          console.log(responseData2);
+          if(responseData2===false){
             this.setState({statut: ''});
           }
           else{
             REQUEST_URL10=REQUEST_URL10P1+responseData1+REQUEST_URL10P2+this.props.event.id;
+            console.log(REQUEST_URL10);
             fetch(REQUEST_URL10)
             .then((response) => response.json())
             .then((responseData3) => {
+              console.log(responseData3);
               if(responseData3===true){
                 this.setState({statut_color: 'green',
                                statut: 'Je participe.',
@@ -103,6 +107,8 @@ class EventDetails extends React.Component{
                                statut: 'Je ne participe pas.',
                                _crossButton: crossButton2});
               }
+              console.log("*********************************");
+              console.log(this.state.statut);
             })
             .done();
           }
@@ -113,12 +119,12 @@ class EventDetails extends React.Component{
 
   }
 
-  _acceptEvent(){
+  _acceptEvent(participation){
     fetch(REQUEST_URL7)
       .then((response) => response.json())
       .then((responseData) => {
         console.log(responseData);
-        REQUEST_URL5=REQUEST_URL5P1+responseData+REQUEST_URL5P2+this.props.event.id;
+        REQUEST_URL5=REQUEST_URL5P1+responseData+REQUEST_URL5P2+this.props.event.id+"/"+participation;
         console.log(REQUEST_URL5);
         fetch(REQUEST_URL5)
         .then((response) => response.json())
@@ -128,36 +134,23 @@ class EventDetails extends React.Component{
           .done()
         })
       .done();
-      this.setState({statut: 'Je participe.',
+      if(participation===true){
+        this.setState({statut: 'Je participe.',
                      statut_color: 'green',
                      _okButton: okButton2,
                      _crossButton: crossButton});
-  }
+      }
+      else {
+        this.setState({statut: 'Je ne participe pas.',
+                     statut_color: 'red',
+                     _okButton: okButton,
+                     _crossButton: crossButton2});
+      }}
 
-  _refuseEvent(){
 
-    fetch(REQUEST_URL7)
-      .then((response) => response.json())
-      .then((responseData) => {
-        console.log(responseData);
-        REQUEST_URL9=REQUEST_URL9P1+responseData+REQUEST_URL9P2+this.props.event.id;
-        console.log(REQUEST_URL9);
-        fetch(REQUEST_URL9)
-        .then((response) => response.json())
-        .then((responseData) => {
-          console.log(responseData);
-          })
-          .done()
-        })
-      .done();
-      this.setState({statut: 'Je ne participe pas.',
-                    statut_color: 'red',
-                    _okButton: okButton,
-                    _crossButton: crossButton2});
-  }
   render() {
-     var event = this.props.event;
-     var email = this.props.email;
+     let event = this.props.event;
+     let email = this.props.email;
      return (
       <View>
       		<View style={styles.topbar}>
@@ -226,11 +219,11 @@ class EventDetails extends React.Component{
                       </View>
                     </TouchableOpacity>
                       <View style={styles.ok_cross_ButtonContainer}>
-                          <TouchableOpacity onPress={() =>this._acceptEvent()}>
+                          <TouchableOpacity onPress={() =>this._acceptEvent(true)}>
                           <Image source={this.state._okButton} style={styles.okButton} ></Image>
                           </TouchableOpacity>
                           <View style={styles.separator}></View>
-                          <TouchableOpacity onPress={() =>this._refuseEvent()}>
+                          <TouchableOpacity onPress={() =>this._acceptEvent(false)}>
                           <Image source={this.state._crossButton} style={styles.crossButton} ></Image>
                           </TouchableOpacity>
                       </View>
