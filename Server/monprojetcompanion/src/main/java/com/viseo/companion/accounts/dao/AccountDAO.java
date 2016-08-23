@@ -26,7 +26,7 @@ public class AccountDAO {
 	}
 
 	@Transactional
-	public void addAccount(long id, String email, String password, String username){	
+	public void addAccount(long id, String email, String password){	
 		Account account = new Account();
 		account.setEmail(email);
 		account.setPassword(password);
@@ -41,6 +41,7 @@ public class AccountDAO {
 		return list;
 	}
 	
+	@Transactional
 	public Collection<AccountEvent> getAccountEventById(long idAccount,long idEvent){
 		Query query=em.createQuery("select ce from AccountEvent ce where ce.pk.account=:account and ce.pk.event=:event");
 		Account account=getAccount(idAccount);
@@ -109,5 +110,25 @@ public class AccountDAO {
 	public boolean isSetParticipation(long idAccount,long idEvent){
 		Collection<AccountEvent> list = getAccountEventById(idAccount,idEvent);
 		return !list.isEmpty();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Collection<AccountEvent> getAccountTrueByEvent(long idEvent){
+		Query query=em.createQuery("select ce from AccountEvent ce where ce.pk.event=:event and ce.participated='true' order by ce.pk.account.email");
+		Event event=getEvent(idEvent);	
+		query.setParameter("event",event);
+		Collection<AccountEvent> list = (Collection<AccountEvent>) query.getResultList();
+		return list;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Transactional
+	public Collection<AccountEvent> getAccountFalseByEvent(long idEvent){
+		Query query=em.createQuery("select ce from AccountEvent ce where ce.pk.event=:event and ce.participated='false' order by ce.pk.account.email");
+		Event event=getEvent(idEvent);	
+		query.setParameter("event",event);
+		Collection<AccountEvent> list = (Collection<AccountEvent>) query.getResultList();
+		return list;
 	}
 }

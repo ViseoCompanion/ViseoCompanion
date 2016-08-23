@@ -1,4 +1,4 @@
-  angular.module('app', ['ngRoute', 'ngCookies','ui.bootstrap', 'ui.bootstrap.datetimepicker'])
+  angular.module('app', ['ngRoute', 'ngCookies','ui.bootstrap', 'ui.bootstrap.datetimepicker','perfect_scrollbar'])
         .config(config)
         .run(run);
 
@@ -34,6 +34,18 @@
                 templateUrl: 'blank/blank.view.html',
                 controllerAs: 'vm'
             })
+
+            .when('/changeEvent', {
+                controller: 'ChangeEventController',
+                templateUrl: 'changeEvent/changeEvent.view.html',
+                controllerAs: 'CE'
+            })
+
+            // .when('/listEvent', {
+            //     controller: 'ListEventController',
+            //     templateUrl: 'listEvent/listEvent.view.html',
+            //     controllerAs: 'LE'
+            // })
             .otherwise({ redirectTo: '/login' });
     }
 
@@ -47,7 +59,8 @@
 
         $rootScope.$on('$locationChangeStart', function (event, next, current) {
             // redirect to login page if not logged in and trying to access a restricted page
-            var restrictedPage = $.inArray($location.path(), ['/login', '/forgotPassword','/event','/createEvent','/blank']) === -1;
+            //var restrictedPage = $.inArray($location.path(), ['/login', '/forgotPassword']) === -1;
+            var restrictedPage = $.inArray($location.path(), ['/login', '/forgotPassword','/event','/createEvent','/blank','/changeEvent','/listEvent']) === -1;
             var loggedIn = $rootScope.globals.currentUser;
             if (restrictedPage && !loggedIn) {
                 $location.path('/login');

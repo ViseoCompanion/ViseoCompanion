@@ -44,7 +44,7 @@ function addZero(i) {
     return i;
 }
 
-var REQUEST_URL = 'http://10.33.171.74:8080/C360/api/event/readEvent';
+var REQUEST_URL = 'http://10.33.171.20:8080/C360/api/event/readEvent';
 
 class HomePage extends React.Component {
 

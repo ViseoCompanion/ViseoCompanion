@@ -1,3 +1,4 @@
+<div class="col-sm-8 col-sm-offset-2">
 <div class="col-md-6 col-md-offset-3" align="center">
     <form class="form-horizontal-blank">
     </form>
@@ -26,7 +27,9 @@
     <form class="form-horizontal-blank-small">
     </form>
     <form class="form-horizontal-blank-medium">
-      <div id="errorMessage">
-      </div>
+        <div ng-show="vm.error" style="color:red">
+            Veuillez entrer des données de connexion valides.
+        </div>
     </form>
+</div>
 </div>

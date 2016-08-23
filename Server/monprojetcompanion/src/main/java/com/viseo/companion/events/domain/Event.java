@@ -56,7 +56,7 @@ public class Event implements java.io.Serializable
 	}
 	
 	public String getDescription(){
-		return description;
+		return this.description;
 	}
 	
 	public String getMotclefs(){

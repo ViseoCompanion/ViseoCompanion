@@ -25,19 +25,19 @@ width: deviceWidth
 } = Dimensions.get('window');
 
 
-let REQUEST_URL7P1 = 'http://10.33.171.74:8080/C360/api/account/getIdAccount/';
+let REQUEST_URL7P1 = 'http://10.33.171.20:8080/C360/api/account/getIdAccount/';
 let REQUEST_URL7P2 = '/events'
 let REQUEST_URL7 = ''
 
-let REQUEST_URL5P1 = 'http://10.33.171.74:8080/C360/api/account/participationEvent/';
+let REQUEST_URL5P1 = 'http://10.33.171.20:8080/C360/api/account/participationEvent/';
 let REQUEST_URL5P2 = '/events/'
 let REQUEST_URL5 = ''
 
-let REQUEST_URL10P1 = 'http://10.33.171.74:8080/C360/api/account/getParticipation/';
+let REQUEST_URL10P1 = 'http://10.33.171.20:8080/C360/api/account/getParticipation/';
 let REQUEST_URL10P2 = '/events/'
 let REQUEST_URL10 = ''
 
-let REQUEST_URL11P1 = 'http://10.33.171.74:8080/C360/api/account/doneParticipation/';
+let REQUEST_URL11P1 = 'http://10.33.171.20:8080/C360/api/account/doneParticipation/';
 let REQUEST_URL11P2 = '/events/'
 let REQUEST_URL11 = ''
 

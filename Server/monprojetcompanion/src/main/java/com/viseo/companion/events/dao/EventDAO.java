@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -42,6 +43,31 @@ public class EventDAO {
 	public void addEvent(Event event){
 		em.persist(event);
 	}
+	
+	public Collection<Event> getEventByNameDate(String eventname,long date){
+		Query query=em.createQuery("select e from Event e where e.event=:event and e.date=:date");
+		Date date1 = new Date(date);
+		query.setParameter("event",eventname);
+		query.setParameter("date",date1);	
+		@SuppressWarnings("unchecked")
+		Collection<Event> list = (Collection<Event>) query.getResultList();
+		return list;
+	}
+	
+	@Transactional
+	public void updateEvent(String eventnameO,long dateO,Event eventT){		
+		Collection<Event> list=getEventByNameDate(eventnameO,dateO);
+		Event event=getEvent(list.iterator().next().getId());
+		em.remove(event);
+		em.persist(eventT);
+	}
+	
+	@Transactional
+	public void deleteEvent(String eventname,long date){		
+		Collection<Event> list=getEventByNameDate(eventname,date);
+		Event event=getEvent(list.iterator().next().getId());
+		em.remove(event);
+	}
 
 	public boolean isEventAlreadySaved(String event){
 		Collection<Event> list = null;
@@ -53,7 +79,7 @@ public class EventDAO {
 		return !list.isEmpty(); //return true if the list is not avoid
 	}
 
-	public List<Event> GetAllEvent() {		
+	public List<Event> getAllEvent() {		
 		return em.createQuery("select a from Event a order by a.date", Event.class).getResultList();
 	}
 }

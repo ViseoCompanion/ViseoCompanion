@@ -35,16 +35,6 @@ angular.module('app')
 
 
           function createEvent() {
-            // console.log(self.event);
-            // console.log(self.event.length);
-            // console.log(self.lieu);
-            // console.log(self.lieu.length);
-            // console.log(self.description);
-            // console.log(self.description.length);
-            // console.log(self.motclefs);
-            // console.log(self.motclefs.length);
-
-            //if(self.event.length<2 || self.lieu.length<2 || self.description.length<2 || self.motclefs.length<2){
             if(self.event && self.lieu && self.description && self.motclefs){
 
               var url='http://localhost:8080/C360/api/event/addEvent';
@@ -72,10 +62,7 @@ angular.module('app')
                     console.log("**************");
                     console.log(data);
                     self.dataLoading = false;
-                    var errorMessage = document.getElementById("errorMessage").inner;
-                    var errorMessage1 = "Veuillez entrer des données valides.";
-                    errorMessage=errorMessage1.fontcolor("red");
-                    document.getElementById("errorMessage").innerHTML = errorMessage;
+                    self.error=true;
                   }
               })
               .error(function(data, status, headers, config) {
@@ -83,10 +70,7 @@ angular.module('app')
               });
             }
             else{
-              var errorMessage = document.getElementById("errorMessage").inner;
-              var errorMessage1 = "Veuillez entrer des données valides.";
-              errorMessage=errorMessage1.fontcolor("red");
-              document.getElementById("errorMessage").innerHTML = errorMessage;
+                self.error=true;
               };
           }
         }]);

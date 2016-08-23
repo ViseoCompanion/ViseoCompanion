@@ -11,6 +11,7 @@
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <mapping class="com.viseo.companion.accounts.domain.Account"/>
         <mapping class="com.viseo.companion.events.domain.Event"/>
+        <mapping class="com.viseo.companion.administrator.domain.Administrator"/>
         <mapping class="com.viseo.companion.accountEvents.domain.AccountEvent"/>
         <mapping class="com.viseo.companion.accountEvents.domain.AccountEventID"/>
     </session-factory>

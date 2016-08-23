@@ -1,0 +1,177 @@
+
+<div class="form-horizontal-changeEvent" align="center">
+  <div class="divider"></div>
+  <div class="divider2"></div>
+  <form class="form-horizontal-blank">
+  </form>
+    <form class="form-horizontal-titre">
+        <h2>Modifier évènement</h2>
+    </form>
+    <div class="col-sm-5">
+      <form name="form" ng-submit="CE.updateEvent()" role="form">
+            <div class="form-group" ng-class="{ 'has-error': form.event.$dirty && form.event.$error.required && form.event.$error.minlength && form.event.$error.pattern}">
+                  <label class="col-sm-3 control-label" for="event" text-align="right">Titre :</label>
+                  <div class="col-sm-9">
+                    <p class="input-group">
+                        <input type="text" class="form-control" size="60" name='event' id="event" ng-model="CE.event" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìîïñóòôöõ' '-_úùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required/>
+                    </p>
+                    <div role="alert">
+                      <span class="error" style="color:red" ng-show="form.event.$error.minlength || form.event.$error.pattern">
+                        * 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #</span>
+                    </div>
+                  </div>
+            </div>
+     <div class="form-group">
+          <label class="col-sm-3 control-label">Date :</label>
+          <div class="col-sm-5">
+            <p class="input-group">
+            <input type="text" id="date"
+            class="form-control"
+            data-format="yyyy-MM-dd"
+            datepicker-popup="dd-MMMM-yyyy"
+            datetime-picker="mediumDate"
+            ng-model="CE.picker1.date"
+            is-open="CE.picker1.open"
+            enable-time="false"
+            datepicker-options="CE.picker1.datepickerOptions"
+            min-Date="minDate"
+            date-disabled="disabled(date, mode)"
+            close-on-date-selection="false"
+            datepicker-append-to-body="true"
+            readonly
+            date-only
+             />
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="CE.openCalendar($event, 'picker1')"><i class="fa fa-calendar"></i></button>
+              </span>
+            </p>
+            </div>
+            <div class="col-sm-4">
+              <p class="input-group">
+              <input type="text" id="time"
+                    stepping="30"
+                    class="form-control"
+                    datetime-picker="HH:mm"
+                    ng-model="CE.picker2.date"
+                    is-open="CE.picker2.open"
+                    enable-date="false"
+                    timepicker-options="CE.picker2.timepickerOptions"
+                    close-on-selection="true"
+                    readonly/>
+              <span class="input-group-btn">
+                  <button type="button" class="btn btn-default" ng-click="CE.openCalendar($event, 'picker2')"><i class="fa fa-clock-o"></i></button>
+              </span>
+              </p>
+            </div>
+     </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.lieu.$dirty && form.lieu.$error.required && form.lieu.$error.minlength && form.lieu.$error.pattern}">
+
+						<label class="col-sm-3 control-label" >Lieu :</label>
+            <div class="col-sm-9">
+              <p class="input-group">
+						      <input type='text' class="form-control" size="60"  name="lieu" id="lieu" ng-model="CE.lieu" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëí' '-_ìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required />
+              </p>
+              <div role="alert">
+                <span class="error" style="color:red" ng-show="form.lieu.$error.minlength || form.lieu.$error.pattern">
+                  * 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #</span>
+              </div>
+            </div>
+
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.description.$dirty && form.description.$error.required && form.description.$error.minlength && form.description.$error.pattern}">
+
+						<label class="col-sm-3 control-label" >Description :</label>
+            <div class="col-sm-9">
+              <p class="input-group">
+                  <textarea name='description' class="form-control"  rows="10" cols="60"  id='description' ng-model="CE.description" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìî' '-_ïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required></textarea>
+              </p>
+              <div role="alert">
+                <span class="error" style="color:red" ng-show="form.description.$error.minlength || form.description.$error.pattern">
+                  * 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #</span>
+              </div>
+            </div>
+        </div>
+
+
+        <div class="form-group" ng-class="{ 'has-error': form.motclefs.$dirty && form.motclefs.$error.required && form.motclefs.$error.minlength && form.motclefs.$error.pattern}">
+          <label class="col-sm-3 control-label" >Mots-clefs :</label>
+            <div class="col-sm-9">
+              <p class="input-group">
+						      <input placeholder="Mot-clef 1, Mot-clef 2, Mot-clef 3" type='text' class="form-control " size="60" name='motclefs' id="motclefs"  ng-model="CE.motclefs" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìî' '-_ïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" ng-minlength="2" required/>
+              </p>
+              <div role="alert">
+                <span class="error" style="color:red" ng-show="form.motclefs.$error.minlength || form.motclefs.$error.pattern">
+                  * 2 caractères minimum, caractères spéciaux autorisés : -, ', ?, !, ., /, virgule, +, *, #</span>
+              </div>
+            </div>
+        </div>
+        <div class="form-actions">
+          <div class="col-sm-10">
+              <div class="col-sm-5">
+              </div>
+              <div class="col-sm-4">
+                <button type="submit" ng-disabled="CE.dataLoading" class="btn btn-primary" style="font-size:20px; width:130px; height:50px">Enregistrer</button>
+              </div>
+              <div class="col-sm-2">
+                <button type="submit" ng-disabled="CE.dataLoading" class="btn btn-primary" style="font-size:20px; width:130px; height:50px">Supprimer</button>
+              </div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <div class="col-sm-10">
+                <img ng-if="CE.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            </div>
+        </div>
+      </form>
+    <form class="form-horizontal-blank-medium">
+        <div ng-show="CE.error" style="color:red">
+            Veuillez entrer des données valides.
+        </div>
+    </form>
+    <form class="form-horizontal-blank">
+    </form>
+    </div>
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-6" data-ng-init="loadPeople()">
+      <div class="col-sm-1" style="font-size:20px;color:green">
+      </div>
+      <div class="col-sm-4" style="font-size:20px;color:green">
+        {{peopleNumY}} Participants
+      </div>
+      <div class="col-sm-6" style="font-size:20px;color:red;padding-left:100px">
+        {{peopleNumN}} ne viennent pas
+      </div>
+      <div class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="20" style="width:500px">
+        <table>
+            <tr ng-repeat="person in people" style="font-size:20px;height:50px">
+                <td class="col-sm-3">{{person.account.email}}</td>
+                <td class="col-sm-2">{{person.participated}}</td>
+            </tr>
+        </table>
+      </div>
+      <form class="form-horizontal-blank">
+      </form>
+      <div class="col-sm-1" style="font-size:20px;color:green">
+      </div>
+      <div class="col-sm-4" style="font-size:20px;height:30px">
+        8 commentaires
+      </div>
+      <div class="col-sm-6" style="font-size:20px;color:green">
+      </div>
+      <div class="col-sm-5" style="font-size:20px;color:green;height:80px，padding-top:20px">
+      </div>
+      <div class="scroller" wheel-propagation="true" wheel-speed="10" min-scrollbar-length="20" style="width:500px">
+        <table>
+            <tr ng-repeat="comment in comments" style="font-size:20px;height:50px">
+                <td class="col-sm-3">{{comment.name}}</td>
+                <td class="col-sm-2">{{comment.date}}</td>
+            </tr>
+        </table>
+      </div>
+    </div>
+</div>

@@ -12,6 +12,7 @@
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<class>com.viseo.companion.events.domain.Event</class>
 		<class>com.viseo.companion.accounts.domain.Account</class>
+		<class>com.viseo.companion.administrator.domain.Administrator</class>
 		<class>com.viseo.companion.accountEvents.domain.AccountEvent</class>
 		<class>com.viseo.companion.accountEvents.domain.AccountEventID</class>
 		<properties>

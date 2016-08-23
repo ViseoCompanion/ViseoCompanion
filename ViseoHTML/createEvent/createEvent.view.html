@@ -1,3 +1,4 @@
+<div class="col-sm-7 col-sm-offset-3">
 <div class="form-horizontal" align="center">
     <form class="form-horizontal-titre">
         <h2>AJOUTER EVENEMENT</h2>
@@ -7,7 +8,7 @@
                   <label class="col-sm-2 control-label" for="event">Titre :</label>
                   <div class="col-sm-8">
                     <p class="input-group">
-                        <input type="text" class="form-control" size="60" name='event' id="event" ng-model="CE.event" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required/>
+                        <input type="text" class="form-control" size="60" name='event' id="event" ng-model="CE.event" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìîïñóòôöõ' '-_úùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required/>
                     </p>
                     <div role="alert">
                       <span class="error" style="color:red" ng-show="form.event.$error.minlength || form.event.$error.pattern">
@@ -67,7 +68,7 @@
 						<label class="col-sm-2 control-label" >Lieu :</label>
             <div class="col-sm-8">
               <p class="input-group">
-						      <input type='text' class="form-control" size="60"  name="lieu" id="lieu" ng-model="CE.lieu" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required />
+						      <input type='text' class="form-control" size="60"  name="lieu" id="lieu" ng-model="CE.lieu" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëí' '-_ìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required />
               </p>
               <div role="alert">
                 <span class="error" style="color:red" ng-show="form.lieu.$error.minlength || form.lieu.$error.pattern">
@@ -83,7 +84,7 @@
 						<label class="col-sm-2 control-label" >Description :</label>
             <div class="col-sm-8">
               <p class="input-group">
-                  <textarea name='description' class="form-control"  rows="10" cols="60"  id='description' ng-model="CE.description" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required></textarea>
+                  <textarea name='description' class="form-control"  rows="10" cols="60"  id='description' ng-model="CE.description" ng-minlength="2" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìî' '-_ïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" required></textarea>
               </p>
               <div role="alert">
                 <span class="error" style="color:red" ng-show="form.description.$error.minlength || form.description.$error.pattern">
@@ -97,7 +98,7 @@
           <label class="col-sm-2 control-label" >Mots-clefs :</label>
             <div class="col-sm-8">
               <p class="input-group">
-						      <input placeholder="Mot clef 1, Mot clef 2, Mot clef 3" type='text' class="form-control " size="60" name='motclefs' id="motclefs"  ng-model="CE.motclefs" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" ng-minlength="2" required/>
+						      <input placeholder="Mot clef 1, Mot clef 2, Mot clef 3" type='text' class="form-control " size="60" name='motclefs' id="motclefs"  ng-model="CE.motclefs" ng-pattern="/^[a-zA-Z0-9.,?!+#áàâäãåçéèêëíìî' '-_ïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝ]*$/" ng-minlength="2" required/>
               </p>
               <div role="alert">
                 <span class="error" style="color:red" ng-show="form.motclefs.$error.minlength || form.motclefs.$error.pattern">
@@ -114,7 +115,9 @@
         </div
 </form>
     <form class="form-horizontal-blank-medium">
-        <div id="errorMessage">
+        <div ng-show="CE.error" style="color:red">
+            Veuillez entrer des données valides.
         </div>
     </form>
+</div>
 </div>

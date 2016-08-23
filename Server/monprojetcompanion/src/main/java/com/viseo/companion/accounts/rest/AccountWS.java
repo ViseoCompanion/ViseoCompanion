@@ -8,10 +8,12 @@ import javax.validation.Valid;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import com.viseo.companion.accountEvents.domain.AccountEvent;
 import com.viseo.companion.accounts.dao.AccountDAO;
 import com.viseo.companion.accounts.domain.Account;
-import com.viseo.companion.events.dao.*;;
+import com.viseo.companion.events.dao.*;
 
+@CrossOrigin
 @RestController
 public class AccountWS {
 
@@ -23,7 +25,6 @@ public class AccountWS {
 	@RequestMapping(value = "${endpoint.addAccount}", method = RequestMethod.POST)
     @ResponseBody
     public boolean addAccount(@Valid @RequestBody Account myAccount, BindingResult bindingResult){
-
 		if(!(bindingResult.hasErrors()) && !accountDAO.isAccountAlreadySaved(myAccount.getEmail())){
 			accountDAO.addAccount(myAccount);
 			return true;
@@ -39,8 +40,7 @@ public class AccountWS {
 	
 	@RequestMapping(value = "${endpoint.Authentification}", method = RequestMethod.POST)
 	@ResponseBody
-	public boolean Authentification(@Valid @RequestBody Account myAccount, BindingResult bindingResult){
-
+	public boolean authentification(@Valid @RequestBody Account myAccount, BindingResult bindingResult){
 		if(!(bindingResult.hasErrors()) && accountDAO.isAccountAlreadySaved(myAccount.getEmail())
 				&& accountDAO.isAuthenticater(myAccount.getEmail(), myAccount.getPassword())){
 		return true;
@@ -80,5 +80,17 @@ public class AccountWS {
     @ResponseBody
     public boolean isAllreadySetParticipation(@PathVariable("idAccount") long idAccount,@PathVariable("idEvent") long idEvent){
 		return accountDAO.isSetParticipation(idAccount,idEvent);
+	}
+	@CrossOrigin
+	@RequestMapping(value = "${endpoint.readYesList}", method = RequestMethod.GET)
+	@ResponseBody
+    public List<AccountEvent> ReadYesList(@PathVariable long id){	
+		return (List<AccountEvent>) accountDAO.getAccountTrueByEvent(id);
+	}
+	@CrossOrigin
+	@RequestMapping(value = "${endpoint.readNoList}", method = RequestMethod.GET)
+	@ResponseBody
+    public List<AccountEvent> ReadNoList(@PathVariable long id){	
+		return (List<AccountEvent>) accountDAO.getAccountFalseByEvent(id);
 	}
 }

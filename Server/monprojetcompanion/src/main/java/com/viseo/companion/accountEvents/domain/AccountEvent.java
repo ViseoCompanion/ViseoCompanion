@@ -29,6 +29,7 @@ public class AccountEvent implements java.io.Serializable {
 	public Account getAccount(){
 		return getPk().getAccount();
 	}
+	
 	public void setAccount(Account account){
 		getPk().setAccount(account);
 	}
@@ -37,6 +38,7 @@ public class AccountEvent implements java.io.Serializable {
 	public Event getEvent(){
 		return getPk().getEvent();
 	}
+	
 	public void setEvent(Event event){
 		getPk().setEvent(event);
 	}
@@ -48,6 +50,7 @@ public class AccountEvent implements java.io.Serializable {
 	public boolean isParticipated() {
 		return participation;
 	}
+	
 	public void setParticipated(boolean participation) {
 		this.participation = participation;
 	}

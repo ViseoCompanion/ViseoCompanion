@@ -17,6 +17,7 @@ public class AccountEventID implements java.io.Serializable{
 	public Account getAccount(){
 		return account;
 	}
+	
 	public void setAccount(Account account){
 		this.account=account;
 	}
@@ -25,6 +26,7 @@ public class AccountEventID implements java.io.Serializable{
 	public Event getEvent(){
 		return event;
 	}
+	
 	public void setEvent(Event event){
 		this.event=event;
 	}

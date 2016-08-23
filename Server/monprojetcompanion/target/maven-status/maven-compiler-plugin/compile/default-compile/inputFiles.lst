@@ -1,8 +1,11 @@
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\events\rest\EventWS.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\accounts\dao\AccountDAO.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\events\dao\EventDAO.java
+C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\administrator\domain\Administrator.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\accountEvents\domain\AccountEvent.java
+C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\administrator\dao\AdministratorDAO.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\accountEvents\domain\AccountEventID.java
+C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\administrator\rest\AdministratorWS.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\accounts\rest\AccountWS.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\accounts\domain\Account.java
 C:\Users\DHU3504\workspace\monprojetcompanion\src\main\java\com\viseo\companion\events\domain\Event.java

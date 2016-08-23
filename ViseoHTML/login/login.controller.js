@@ -1,12 +1,6 @@
-(function () {
-    'use strict';
+angular.module('app')
+        .controller('LoginController', ['$location','$http',function($location,$http){
 
-    angular
-        .module('app')
-        .controller('LoginController', LoginController);
-
-    LoginController.$inject = ['$location','$http'];
-    function LoginController($location,$http) {
         var vm = this;
 
         vm.login = login;
@@ -32,16 +26,11 @@
                 console.log("**************");
                 console.log(data);
                 vm.dataLoading = false;
-                var errorMessage = document.getElementById("errorMessage").inner;
-                var errorMessage1 = "Veuillez entrer des données de connexion valides.";
-                errorMessage=errorMessage1.fontcolor("red");
-                document.getElementById("errorMessage").innerHTML = errorMessage;
+                vm.error=true;
               }
           })
           .error(function(data, status, headers, config) {
             console.log("**************");
           });
-        };
-    }
-
-})();
+        }
+      }]);
